@@ -1,6 +1,71 @@
-<mvc:View controllerName="ui5learning.controller.Main"
+<mvc:View
+    controllerName="ui5learning.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
+
     <Page id="page" title="{i18n>title}">
+        <content>
+            <Table
+                id="booksTable"
+                headerText="{i18n>booksTableTitle}"
+                items="{books>/books}">
+
+                <columns>
+                    <Column id="bookIdColumn">
+                        <Text id="bookIdHeader" text="{i18n>bookId}" />
+                    </Column>
+
+                    <Column id="bookNameColumn">
+                        <Text id="bookNameHeader" text="{i18n>bookName}" />
+                    </Column>
+
+                    <Column id="bookAuthorColumn">
+                        <Text id="bookAuthorHeader" text="{i18n>bookAuthor}" />
+                    </Column>
+
+                    <Column id="bookGenreColumn">
+                        <Text id="bookGenreHeader" text="{i18n>bookGenre}" />
+                    </Column>
+
+                    <Column id="bookReleaseDateColumn">
+                        <Text
+                            id="bookReleaseDateHeader"
+                            text="{i18n>bookReleaseDate}" />
+                    </Column>
+
+                    <Column id="bookQuantityColumn" hAlign="End">
+                        <Text
+                            id="bookQuantityHeader"
+                            text="{i18n>bookAvailableQuantity}" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem id="bookRow">
+                        <cells>
+                            <Text id="bookIdCell" text="{books>ID}" />
+                            <Text id="bookNameCell" text="{books>Name}" />
+                            <Text id="bookAuthorCell" text="{books>Author}" />
+                            <Text id="bookGenreCell" text="{books>Genre}" />
+
+                            <Text
+                                id="bookReleaseDateCell"
+                                text="{
+                                    path: 'books>ReleaseDate',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: {
+                                        pattern: 'yyyy-MM-dd'
+                                    }
+                                }" />
+
+                            <ObjectNumber
+                                id="bookQuantityCell"
+                                number="{books>AvailableQuantity}"
+                                emphasized="false" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
     </Page>
 </mvc:View>
