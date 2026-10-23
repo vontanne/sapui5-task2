@@ -1,0 +1,23 @@
+{
+  "generationParameters": {
+    "generationDate": "Fri Oct 23 2026 06:56:38 GMT+0400 (Armenia Standard Time)",
+    "generatorPlatform": "Visual Studio Code",
+    "serviceType": "None",
+    "metadataFilename": "",
+    "serviceUrl": "N/A",
+    "appName": "ui5learning",
+    "appTitle": "UI5 Learning",
+    "appDescription": "Practice SAP Fiori application for the SAPUI5 course.",
+    "appNamespace": "",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.153.0",
+    "enableEslint": true,
+    "enableTypeScript": false,
+    "showMockDataInfo": false,
+    "generatorVersion": "1.33.0",
+    "template": "Basic",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}
