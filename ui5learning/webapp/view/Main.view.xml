@@ -1,14 +1,61 @@
 <mvc:View
     controllerName="ui5learning.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
     xmlns="sap.m">
 
     <Page id="page" title="{i18n>title}">
         <content>
             <Table
                 id="booksTable"
-                headerText="{i18n>booksTableTitle}"
+                mode="MultiSelect"
                 items="{books>/books}">
+
+                <headerToolbar>
+                    <Toolbar id="booksToolbar">
+                        <content>
+                            <Title
+                                id="booksToolbarTitle"
+                                text="{i18n>booksTableTitle}" />
+                            <Button
+                                id="addRecordButton"
+                                text="{i18n>addRecord}"
+                                press=".onAddRecord" />
+                            <Button
+                                id="deleteRecordButton"
+                                text="{i18n>deleteRecord}"
+                                press=".onDeleteRecord" />
+                            <ToolbarSeparator id="booksToolbarSeparator" />
+                            <Label
+                                id="titleFilterLabel"
+                                text="{i18n>titleFilterLabel}"
+                                labelFor="titleFilterInput" />
+                            <Input
+                                id="titleFilterInput"
+                                width="14rem"
+                                placeholder="{i18n>titleFilterPlaceholder}" />
+
+                            <Label
+                                id="genreFilterLabel"
+                                text="{i18n>bookGenre}"
+                                labelFor="genreFilterSelect" />
+
+                            <Select
+                                id="genreFilterSelect"
+                                selectedKey=""
+                                items="{books>/genres}">
+                                <core:Item
+                                    id="genreFilterItem"
+                                    key="{books>key}"
+                                    text="{books>text}" />
+                            </Select>
+                            <Button
+                                id="filterBooksButton"
+                                text="{i18n>filterBooks}"
+                                press=".onFilter" />
+                        </content>
+                    </Toolbar>
+                </headerToolbar>
 
                 <columns>
                     <Column id="bookIdColumn">
