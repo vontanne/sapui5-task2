@@ -12,6 +12,8 @@ sap.ui.define(
     return BaseController.extend("ui5learning.controller.Main", {
       onInit() {
         const booksModel = new JSONModel({
+          filterInput: "",
+          selectedGenre: "",
           books: [
             {
               ID: "1",
@@ -118,8 +120,11 @@ sap.ui.define(
 
       onFilter() {
         const table = this.byId("booksTable");
-        const title = this.byId("titleFilterInput").getValue().trim();
-        const genre = this.byId("genreFilterSelect").getSelectedKey();
+        const booksModel = this.getModel("books");
+        // const title = this.byId("titleFilterInput").getValue().trim();
+        const title = booksModel.getProperty("/filterInput").trim();
+        //  const genre = this.byId("genreFilterSelect").getSelectedKey();
+        const genre = booksModel.getProperty("/selectedGenre");
         const filters = [];
 
         if (title) {
@@ -207,7 +212,8 @@ sap.ui.define(
           .getResourceBundle()
           .getText("allGenres");
 
-        const selectedGenre = this.byId("genreFilterSelect").getSelectedKey();
+        // const selectedGenre = this.byId("genreFilterSelect").getSelectedKey();
+        const selectedGenre = booksModel.getProperty("/selectedGenre");
 
         booksModel.setProperty("/genres", [
           { key: "", text: allGenresText },
@@ -220,8 +226,13 @@ sap.ui.define(
       },
 
       _resetFilters() {
-        this.byId("titleFilterInput").setValue("");
-        this.byId("genreFilterSelect").setSelectedKey("");
+        // this.byId("titleFilterInput").setValue("");
+        // this.byId("genreFilterSelect").setSelectedKey("");
+        const booksModel = this.getModel("books");
+
+        booksModel.setProperty("/filterInput", "");
+        booksModel.setProperty("/selectedGenre", "");
+
         this.onFilter();
       }
     });

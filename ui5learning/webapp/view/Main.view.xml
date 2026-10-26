@@ -33,7 +33,8 @@
                             <Input
                                 id="titleFilterInput"
                                 width="14rem"
-                                placeholder="{i18n>titleFilterPlaceholder}" />
+                                placeholder="{i18n>titleFilterPlaceholder}"
+                                value="{books>/filterInput}" />
 
                             <Label
                                 id="genreFilterLabel"
@@ -42,7 +43,7 @@
 
                             <Select
                                 id="genreFilterSelect"
-                                selectedKey=""
+                                selectedKey="{books>/selectedGenre}"
                                 items="{books>/genres}">
                                 <core:Item
                                     id="genreFilterItem"
