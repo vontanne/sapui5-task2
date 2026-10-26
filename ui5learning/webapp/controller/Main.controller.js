@@ -21,7 +21,9 @@ sap.ui.define(
               Author: "Arkady and Boris Strugatsky",
               Genre: "Science Fiction",
               ReleaseDate: new Date(1972, 6, 1),
-              AvailableQuantity: 12
+              AvailableQuantity: 12,
+              EditMode: false,
+              DraftTitle: ""
             },
             {
               ID: "2",
@@ -29,7 +31,9 @@ sap.ui.define(
               Author: "Arkady and Boris Strugatsky",
               Genre: "Science Fiction",
               ReleaseDate: new Date(1964, 0, 1),
-              AvailableQuantity: 7
+              AvailableQuantity: 7,
+              EditMode: false,
+              DraftTitle: ""
             },
             {
               ID: "3",
@@ -37,7 +41,9 @@ sap.ui.define(
               Author: "Andrew S. Tanenbaum and Herbert Bos",
               Genre: "Computer Science",
               ReleaseDate: new Date(2022, 9, 14),
-              AvailableQuantity: 5
+              AvailableQuantity: 5,
+              EditMode: false,
+              DraftTitle: ""
             },
             {
               ID: "4",
@@ -45,7 +51,9 @@ sap.ui.define(
               Author: "Frank Herbert",
               Genre: "Science Fiction",
               ReleaseDate: new Date(1965, 7, 1),
-              AvailableQuantity: 20
+              AvailableQuantity: 20,
+              EditMode: false,
+              DraftTitle: ""
             },
             {
               ID: "5",
@@ -53,7 +61,9 @@ sap.ui.define(
               Author: "Yaron Minsky and Anil Madhavapeddy",
               Genre: "Computer Science",
               ReleaseDate: new Date(2022, 9, 13),
-              AvailableQuantity: 8
+              AvailableQuantity: 8,
+              EditMode: false,
+              DraftTitle: ""
             },
             {
               ID: "6",
@@ -61,7 +71,9 @@ sap.ui.define(
               Author: "Isaac Asimov",
               Genre: "Science Fiction",
               ReleaseDate: new Date(1952, 0, 1),
-              AvailableQuantity: 15
+              AvailableQuantity: 15,
+              EditMode: false,
+              DraftTitle: ""
             },
             {
               ID: "7",
@@ -69,7 +81,9 @@ sap.ui.define(
               Author: "Arthur C. Clarke",
               Genre: "Science Fiction",
               ReleaseDate: new Date(1968, 5, 1),
-              AvailableQuantity: 0
+              AvailableQuantity: 0,
+              EditMode: false,
+              DraftTitle: ""
             },
             {
               ID: "8",
@@ -77,7 +91,9 @@ sap.ui.define(
               Author: "H. G. Wells",
               Genre: "Science Fiction",
               ReleaseDate: new Date(1895, 4, 7),
-              AvailableQuantity: 10
+              AvailableQuantity: 10,
+              EditMode: false,
+              DraftTitle: ""
             },
             {
               ID: "9",
@@ -85,7 +101,9 @@ sap.ui.define(
               Author: "Israel M. Gelfand",
               Genre: "Mathematics",
               ReleaseDate: new Date(1961, 0, 1),
-              AvailableQuantity: 7
+              AvailableQuantity: 7,
+              EditMode: false,
+              DraftTitle: ""
             },
             {
               ID: "10",
@@ -93,7 +111,9 @@ sap.ui.define(
               Author: "Edmund Landau",
               Genre: "Mathematics",
               ReleaseDate: new Date(1999, 0, 1),
-              AvailableQuantity: 4
+              AvailableQuantity: 4,
+              EditMode: false,
+              DraftTitle: ""
             },
             {
               ID: "11",
@@ -101,7 +121,9 @@ sap.ui.define(
               Author: "Grady Booch et al.",
               Genre: "Computer Science",
               ReleaseDate: new Date(2007, 3, 30),
-              AvailableQuantity: 5
+              AvailableQuantity: 5,
+              EditMode: false,
+              DraftTitle: ""
             },
             {
               ID: "12",
@@ -109,7 +131,9 @@ sap.ui.define(
               Author: "Ursula K. Le Guin",
               Genre: "Science Fiction",
               ReleaseDate: new Date(1969, 2, 1),
-              AvailableQuantity: 9
+              AvailableQuantity: 9,
+              EditMode: false,
+              DraftTitle: ""
             }
           ]
         });
@@ -166,7 +190,9 @@ sap.ui.define(
           Author: "",
           Genre: "",
           ReleaseDate: null,
-          AvailableQuantity: null
+          AvailableQuantity: null,
+          EditMode: false,
+          DraftTitle: ""
         };
 
         booksModel.setProperty("/books", [...books, newBook]);
@@ -191,6 +217,29 @@ sap.ui.define(
         table.removeSelections(true);
         booksModel.setProperty("/books", remainingBooks);
         this._updateGenres();
+      },
+
+      onEditTitle(event) {
+        const context = event.getSource().getBindingContext("books");
+        const rowPath = context.getPath();
+        const booksModel = this.getModel("books");
+        const title = booksModel.getProperty(`${rowPath}/Name`);
+
+        booksModel.setProperty(`${rowPath}/DraftTitle`, title);
+        booksModel.setProperty(`${rowPath}/EditMode`, true);
+      },
+
+      onSaveTitle(event) {
+        const table = this.byId("booksTable");
+        const context = event.getSource().getBindingContext("books");
+        const rowPath = context.getPath();
+        const booksModel = this.getModel("books");
+        const title = booksModel.getProperty(`${rowPath}/DraftTitle`);
+
+        booksModel.setProperty(`${rowPath}/Name`, title);
+        booksModel.setProperty(`${rowPath}/EditMode`, false);
+
+        table.getBinding("items").refresh(true);
       },
 
       _updateGenres() {
