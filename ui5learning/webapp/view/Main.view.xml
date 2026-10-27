@@ -86,13 +86,29 @@
                             id="bookQuantityHeader"
                             text="{i18n>bookAvailableQuantity}" />
                     </Column>
+
+                    <Column id="bookActionsColumn" width="9rem">
+                        <Text id="bookActionsHeader" text="{i18n>actions}" />
+                    </Column>
                 </columns>
 
                 <items>
                     <ColumnListItem id="bookRow">
                         <cells>
                             <Text id="bookIdCell" text="{books>ID}" />
-                            <Text id="bookNameCell" text="{books>Name}" />
+                            <VBox id="bookNameCellContainer" width="100%">
+                                <Text
+                                    id="bookNameCell"
+                                    text="{books>Name}"
+                                    visible="{= !%{books>EditMode} }" />
+                                <Input
+                                    id="bookTitleInput"
+                                    value="{books>DraftTitle}"
+                                    valueLiveUpdate="true"
+                                    visible="{books>EditMode}"
+                                    width="100%"
+                                    ariaLabelledBy="bookNameHeader" />
+                            </VBox>
                             <Text id="bookAuthorCell" text="{books>Author}" />
                             <Text id="bookGenreCell" text="{books>Genre}" />
 
@@ -110,6 +126,19 @@
                                 id="bookQuantityCell"
                                 number="{books>AvailableQuantity}"
                                 emphasized="false" />
+
+                            <HBox id="bookActionsCell">
+                                <Button
+                                    id="editTitleButton"
+                                    text="{i18n>editTitle}"
+                                    visible="{= !%{books>EditMode} }"
+                                    press=".onEditTitle" />
+                                <Button
+                                    id="saveTitleButton"
+                                    text="{i18n>save}"
+                                    visible="{books>EditMode}"
+                                    press=".onSaveTitle" />
+                            </HBox>
                         </cells>
                     </ColumnListItem>
                 </items>
