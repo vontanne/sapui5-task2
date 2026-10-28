@@ -9,6 +9,7 @@
             <Table
                 id="booksTable"
                 mode="MultiSelect"
+                selectionChange=".onSelectionChange"
                 items="{books>/books}">
 
                 <headerToolbar>
@@ -24,6 +25,7 @@
                             <Button
                                 id="deleteRecordButton"
                                 text="{i18n>deleteRecord}"
+                                enabled="{books>/hasSelection}"
                                 press=".onDeleteRecord" />
                             <ToolbarSeparator id="booksToolbarSeparator" />
                             <Label
