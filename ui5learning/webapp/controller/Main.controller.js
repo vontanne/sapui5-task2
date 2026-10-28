@@ -201,15 +201,36 @@ sap.ui.define(
 
       onDeleteRecord() {
         const table = this.byId("booksTable");
+
+        if (table.getSelectedContexts().length === 0) {
+          return;
+        }
+
+        if (!this._deleteConfirmationPromise) {
+          this._deleteConfirmationPromise = this.loadFragment({
+            name: "ui5learning.view.DeleteConfirmation"
+          });
+        }
+
+        this._deleteConfirmationPromise.then((dialog) => {
+          dialog.open();
+        });
+      },
+
+      onConfirmDelete() {
+        const dialog = this.byId("deleteConfirmationDialog");
+        const table = this.byId("booksTable");
         const selectedContexts = table.getSelectedContexts();
 
         if (selectedContexts.length === 0) {
+          dialog.close();
           return;
         }
 
         const selectedBooks = new Set(
           selectedContexts.map((context) => context.getObject())
         );
+
         const booksModel = this.getModel("books");
         const books = booksModel.getProperty("/books");
         const remainingBooks = books.filter((book) => !selectedBooks.has(book));
@@ -217,6 +238,12 @@ sap.ui.define(
         table.removeSelections(true);
         booksModel.setProperty("/books", remainingBooks);
         this._updateGenres();
+
+        dialog.close();
+      },
+
+      onCancelDelete() {
+        this.byId("deleteConfirmationDialog").close();
       },
 
       onEditTitle(event) {

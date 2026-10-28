@@ -1,0 +1,33 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+
+  <Dialog
+    id="deleteConfirmationDialog"
+    type="Message"
+    title="{i18n>deleteConfirmationTitle}"
+    initialFocus="cancelDeleteButton">
+
+    <content>
+      <Text
+        id="deleteConfirmationText"
+        text="{i18n>deleteConfirmationMessage}"
+      />
+    </content>
+
+    <beginButton>
+      <Button
+        id="confirmDeleteButton"
+        text="{i18n>deleteConfirmationYes}"
+        type="Reject"
+        press=".onConfirmDelete" />
+    </beginButton>
+
+    <endButton>
+      <Button
+        id="cancelDeleteButton"
+        text="{i18n>deleteConfirmationNo}"
+        press=".onCancelDelete" />
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>
