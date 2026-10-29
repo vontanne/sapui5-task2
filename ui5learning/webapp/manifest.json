@@ -50,6 +50,10 @@
       "cozy": true
     },
     "models": {
+      "books": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/books.json"
+      },
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {

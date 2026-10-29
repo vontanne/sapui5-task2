@@ -1,0 +1,127 @@
+{
+  "filterInput": "",
+  "selectedGenre": "",
+  "hasSelection": false,
+  "books": [
+    {
+      "ID": "1",
+      "Name": "Roadside Picnic",
+      "Author": "Arkady and Boris Strugatsky",
+      "Genre": "Science Fiction",
+      "ReleaseDate": "1972-07-01",
+      "AvailableQuantity": 12,
+      "EditMode": false,
+      "DraftTitle": ""
+    },
+    {
+      "ID": "2",
+      "Name": "Hard to Be a God",
+      "Author": "Arkady and Boris Strugatsky",
+      "Genre": "Science Fiction",
+      "ReleaseDate": "1964-01-01",
+      "AvailableQuantity": 7,
+      "EditMode": false,
+      "DraftTitle": ""
+    },
+    {
+      "ID": "3",
+      "Name": "Modern Operating Systems",
+      "Author": "Andrew S. Tanenbaum and Herbert Bos",
+      "Genre": "Computer Science",
+      "ReleaseDate": "2022-10-14",
+      "AvailableQuantity": 5,
+      "EditMode": false,
+      "DraftTitle": ""
+    },
+    {
+      "ID": "4",
+      "Name": "Dune",
+      "Author": "Frank Herbert",
+      "Genre": "Science Fiction",
+      "ReleaseDate": "1965-08-01",
+      "AvailableQuantity": 20,
+      "EditMode": false,
+      "DraftTitle": ""
+    },
+    {
+      "ID": "5",
+      "Name": "Real World OCaml",
+      "Author": "Yaron Minsky and Anil Madhavapeddy",
+      "Genre": "Computer Science",
+      "ReleaseDate": "2022-10-13",
+      "AvailableQuantity": 8,
+      "EditMode": false,
+      "DraftTitle": ""
+    },
+    {
+      "ID": "6",
+      "Name": "Foundation and Empire",
+      "Author": "Isaac Asimov",
+      "Genre": "Science Fiction",
+      "ReleaseDate": "1952-01-01",
+      "AvailableQuantity": 15,
+      "EditMode": false,
+      "DraftTitle": ""
+    },
+    {
+      "ID": "7",
+      "Name": "2001: A Space Odyssey",
+      "Author": "Arthur C. Clarke",
+      "Genre": "Science Fiction",
+      "ReleaseDate": "1968-06-01",
+      "AvailableQuantity": 0,
+      "EditMode": false,
+      "DraftTitle": ""
+    },
+    {
+      "ID": "8",
+      "Name": "The Time Machine",
+      "Author": "H. G. Wells",
+      "Genre": "Science Fiction",
+      "ReleaseDate": "1895-05-07",
+      "AvailableQuantity": 10,
+      "EditMode": false,
+      "DraftTitle": ""
+    },
+    {
+      "ID": "9",
+      "Name": "Lectures on Linear Algebra",
+      "Author": "Israel M. Gelfand",
+      "Genre": "Mathematics",
+      "ReleaseDate": "1961-01-01",
+      "AvailableQuantity": 7,
+      "EditMode": false,
+      "DraftTitle": ""
+    },
+    {
+      "ID": "10",
+      "Name": "Elementary Number Theory",
+      "Author": "Edmund Landau",
+      "Genre": "Mathematics",
+      "ReleaseDate": "1999-01-01",
+      "AvailableQuantity": 4,
+      "EditMode": false,
+      "DraftTitle": ""
+    },
+    {
+      "ID": "11",
+      "Name": "Object-Oriented Analysis and Design with Applications",
+      "Author": "Grady Booch et al.",
+      "Genre": "Computer Science",
+      "ReleaseDate": "2007-04-30",
+      "AvailableQuantity": 5,
+      "EditMode": false,
+      "DraftTitle": ""
+    },
+    {
+      "ID": "12",
+      "Name": "The Left Hand of Darkness",
+      "Author": "Ursula K. Le Guin",
+      "Genre": "Science Fiction",
+      "ReleaseDate": "1969-03-01",
+      "AvailableQuantity": 9,
+      "EditMode": false,
+      "DraftTitle": ""
+    }
+  ]
+}
