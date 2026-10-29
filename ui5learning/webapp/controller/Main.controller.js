@@ -4,9 +4,21 @@ sap.ui.define(
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/model/FilterType"
+    "sap/ui/model/FilterType",
+    "sap/m/Dialog",
+    "sap/m/Button",
+    "sap/m/Text"
   ],
-  (BaseController, JSONModel, Filter, FilterOperator, FilterType) => {
+  (
+    BaseController,
+    JSONModel,
+    Filter,
+    FilterOperator,
+    FilterType,
+    Dialog,
+    Button,
+    Text
+  ) => {
     "use strict";
 
     return BaseController.extend("ui5learning.controller.Main", {
@@ -14,6 +26,7 @@ sap.ui.define(
         const booksModel = new JSONModel({
           filterInput: "",
           selectedGenre: "",
+          hasSelection: false,
           books: [
             {
               ID: "1",
@@ -176,7 +189,7 @@ sap.ui.define(
         const tableFilters =
           filters.length > 0 ? [new Filter({ filters, and: true })] : [];
 
-        table.removeSelections(true);
+        table.removeSelections(true, true);
         table.getBinding("items").filter(tableFilters, FilterType.Application);
       },
 
@@ -199,13 +212,54 @@ sap.ui.define(
         this._resetFilters();
       },
 
+      onSelectionChange() {
+        const table = this.byId("booksTable");
+        const booksModel = this.getModel("books");
+        const hasSelection = table.getSelectedContexts().length > 0;
+
+        booksModel.setProperty("/hasSelection", hasSelection);
+      },
+
       onDeleteRecord() {
+        const message = new Text(this.createId("deleteConfirmationText"), {
+          text: "{i18n>deleteConfirmationMessage}"
+        });
+
+        const yesButton = new Button(this.createId("confirmDeleteButton"), {
+          text: "{i18n>deleteConfirmationYes}",
+          type: "Emphasized"
+        });
+
+        const noButton = new Button(this.createId("cancelDeleteButton"), {
+          text: "{i18n>deleteConfirmationNo}"
+        });
+
+        const dialog = new Dialog(this.createId("deleteConfirmationDialog"), {
+          type: "Message",
+          state: "Warning",
+          title: "{i18n>deleteConfirmationTitle}",
+          content: message,
+          ariaDescribedBy: message,
+          initialFocus: noButton,
+          beginButton: yesButton,
+          endButton: noButton,
+          afterClose: () => dialog.destroy()
+        });
+
+        yesButton.attachPress(() => {
+          this._deleteSelectedBooks();
+          dialog.close();
+        });
+
+        noButton.attachPress(() => dialog.close());
+
+        this.getView().addDependent(dialog);
+        dialog.open();
+      },
+
+      _deleteSelectedBooks() {
         const table = this.byId("booksTable");
         const selectedContexts = table.getSelectedContexts();
-
-        if (selectedContexts.length === 0) {
-          return;
-        }
 
         const selectedBooks = new Set(
           selectedContexts.map((context) => context.getObject())
@@ -214,10 +268,59 @@ sap.ui.define(
         const books = booksModel.getProperty("/books");
         const remainingBooks = books.filter((book) => !selectedBooks.has(book));
 
-        table.removeSelections(true);
+        table.removeSelections(true, true);
         booksModel.setProperty("/books", remainingBooks);
         this._updateGenres();
       },
+
+      /* Fragment-based dialog implementation
+      onDeleteRecord() {
+        const table = this.byId("booksTable");
+
+        if (table.getSelectedContexts().length === 0) {
+          return;
+        }
+
+        if (!this._deleteConfirmationPromise) {
+          this._deleteConfirmationPromise = this.loadFragment({
+            name: "ui5learning.view.DeleteConfirmation"
+          });
+        }
+
+        this._deleteConfirmationPromise.then((dialog) => {
+          dialog.open();
+        });
+      },
+
+      onConfirmDelete() {
+        const dialog = this.byId("deleteConfirmationDialog");
+        const table = this.byId("booksTable");
+        const selectedContexts = table.getSelectedContexts();
+
+        if (selectedContexts.length === 0) {
+          dialog.close();
+          return;
+        }
+
+        const selectedBooks = new Set(
+          selectedContexts.map((context) => context.getObject())
+        );
+
+        const booksModel = this.getModel("books");
+        const books = booksModel.getProperty("/books");
+        const remainingBooks = books.filter((book) => !selectedBooks.has(book));
+
+        table.removeSelections(true);
+        booksModel.setProperty("/books", remainingBooks);
+        this._updateGenres();
+
+        dialog.close();
+      },
+
+      onCancelDelete() {
+        this.byId("deleteConfirmationDialog").close();
+      },
+      */
 
       onEditTitle(event) {
         const context = event.getSource().getBindingContext("books");
@@ -240,6 +343,7 @@ sap.ui.define(
         booksModel.setProperty(`${rowPath}/EditMode`, false);
 
         table.getBinding("items").refresh(true);
+        this.onSelectionChange();
       },
 
       _updateGenres() {
