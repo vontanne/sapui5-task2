@@ -26,7 +26,7 @@
                             <Button
                                 id="deleteRecordButton"
                                 text="{i18n>deleteRecord}"
-                                enabled="{books>/hasSelection}"
+                                enabled="{view>/hasSelection}"
                                 press=".onDeleteRecord" />
                             <ToolbarSeparator id="booksToolbarSeparator" />
                             <Label
@@ -37,7 +37,7 @@
                                 id="titleFilterInput"
                                 width="14rem"
                                 placeholder="{i18n>titleFilterPlaceholder}"
-                                value="{books>/filterInput}" />
+                                value="{view>/titleFilter}" />
 
                             <Label
                                 id="genreFilterLabel"
@@ -46,12 +46,12 @@
 
                             <Select
                                 id="genreFilterSelect"
-                                selectedKey="{books>/selectedGenre}"
-                                items="{books>/genres}">
+                                selectedKey="{view>/selectedGenre}"
+                                items="{view>/genres}">
                                 <core:Item
                                     id="genreFilterItem"
-                                    key="{books>key}"
-                                    text="{books>text}" />
+                                    key="{view>key}"
+                                    text="{view>text}" />
                             </Select>
                             <Button
                                 id="filterBooksButton"
@@ -108,7 +108,7 @@
                                     id="bookTitleInput"
                                     value="{books>DraftTitle}"
                                     valueLiveUpdate="true"
-                                    visible="{books>EditMode}"
+                                    visible="{= !!%{books>EditMode} }"
                                     width="100%"
                                     ariaLabelledBy="bookNameHeader" />
                             </VBox>
@@ -117,14 +117,15 @@
 
                             <Text
                                 id="bookReleaseDateCell"
+                                core:require="{ DateType: 'sap/ui/model/type/Date' }"
                                 text="{
                                     path: 'books>ReleaseDate',
-                                    type: 'sap.ui.model.type.Date',
+                                    type: 'DateType',
                                     formatOptions: {
                                         source: {
                                             pattern: 'yyyy-MM-dd'
                                         },
-                                        pattern: 'yyyy-MM-dd'
+                                        style: 'medium'
                                     }
                                 }" />
 
@@ -142,7 +143,7 @@
                                 <Button
                                     id="saveTitleButton"
                                     text="{i18n>save}"
-                                    visible="{books>EditMode}"
+                                    visible="{= !!%{books>EditMode} }"
                                     press=".onSaveTitle" />
                             </HBox>
                         </cells>

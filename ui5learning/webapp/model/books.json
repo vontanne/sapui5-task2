@@ -1,7 +1,4 @@
 {
-  "filterInput": "",
-  "selectedGenre": "",
-  "hasSelection": false,
   "books": [
     {
       "ID": "1",
@@ -9,9 +6,7 @@
       "Author": "Arkady and Boris Strugatsky",
       "Genre": "Science Fiction",
       "ReleaseDate": "1972-07-01",
-      "AvailableQuantity": 12,
-      "EditMode": false,
-      "DraftTitle": ""
+      "AvailableQuantity": 12
     },
     {
       "ID": "2",
@@ -19,9 +14,7 @@
       "Author": "Arkady and Boris Strugatsky",
       "Genre": "Science Fiction",
       "ReleaseDate": "1964-01-01",
-      "AvailableQuantity": 7,
-      "EditMode": false,
-      "DraftTitle": ""
+      "AvailableQuantity": 7
     },
     {
       "ID": "3",
@@ -29,9 +22,7 @@
       "Author": "Andrew S. Tanenbaum and Herbert Bos",
       "Genre": "Computer Science",
       "ReleaseDate": "2022-10-14",
-      "AvailableQuantity": 5,
-      "EditMode": false,
-      "DraftTitle": ""
+      "AvailableQuantity": 5
     },
     {
       "ID": "4",
@@ -39,9 +30,7 @@
       "Author": "Frank Herbert",
       "Genre": "Science Fiction",
       "ReleaseDate": "1965-08-01",
-      "AvailableQuantity": 20,
-      "EditMode": false,
-      "DraftTitle": ""
+      "AvailableQuantity": 20
     },
     {
       "ID": "5",
@@ -49,9 +38,7 @@
       "Author": "Yaron Minsky and Anil Madhavapeddy",
       "Genre": "Computer Science",
       "ReleaseDate": "2022-10-13",
-      "AvailableQuantity": 8,
-      "EditMode": false,
-      "DraftTitle": ""
+      "AvailableQuantity": 8
     },
     {
       "ID": "6",
@@ -59,9 +46,7 @@
       "Author": "Isaac Asimov",
       "Genre": "Science Fiction",
       "ReleaseDate": "1952-01-01",
-      "AvailableQuantity": 15,
-      "EditMode": false,
-      "DraftTitle": ""
+      "AvailableQuantity": 15
     },
     {
       "ID": "7",
@@ -69,9 +54,7 @@
       "Author": "Arthur C. Clarke",
       "Genre": "Science Fiction",
       "ReleaseDate": "1968-06-01",
-      "AvailableQuantity": 0,
-      "EditMode": false,
-      "DraftTitle": ""
+      "AvailableQuantity": 0
     },
     {
       "ID": "8",
@@ -79,9 +62,7 @@
       "Author": "H. G. Wells",
       "Genre": "Science Fiction",
       "ReleaseDate": "1895-05-07",
-      "AvailableQuantity": 10,
-      "EditMode": false,
-      "DraftTitle": ""
+      "AvailableQuantity": 10
     },
     {
       "ID": "9",
@@ -89,9 +70,7 @@
       "Author": "Israel M. Gelfand",
       "Genre": "Mathematics",
       "ReleaseDate": "1961-01-01",
-      "AvailableQuantity": 7,
-      "EditMode": false,
-      "DraftTitle": ""
+      "AvailableQuantity": 7
     },
     {
       "ID": "10",
@@ -99,9 +78,7 @@
       "Author": "Edmund Landau",
       "Genre": "Mathematics",
       "ReleaseDate": "1999-01-01",
-      "AvailableQuantity": 4,
-      "EditMode": false,
-      "DraftTitle": ""
+      "AvailableQuantity": 4
     },
     {
       "ID": "11",
@@ -109,9 +86,7 @@
       "Author": "Grady Booch et al.",
       "Genre": "Computer Science",
       "ReleaseDate": "2007-04-30",
-      "AvailableQuantity": 5,
-      "EditMode": false,
-      "DraftTitle": ""
+      "AvailableQuantity": 5
     },
     {
       "ID": "12",
@@ -119,9 +94,7 @@
       "Author": "Ursula K. Le Guin",
       "Genre": "Science Fiction",
       "ReleaseDate": "1969-03-01",
-      "AvailableQuantity": 9,
-      "EditMode": false,
-      "DraftTitle": ""
+      "AvailableQuantity": 9
     }
   ]
 }

@@ -1,6 +1,9 @@
+"use strict";
+
 sap.ui.define(
   [
     "ui5learning/controller/BaseController",
+    "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/ui/model/FilterType",
@@ -9,22 +12,33 @@ sap.ui.define(
     "sap/m/Button",
     "sap/m/Text"
   ],
-  (
-    BaseController,
-    Filter,
-    FilterOperator,
-    FilterType,
-    Dialog,
-    MessageBox,
-    Button,
-    Text
-  ) => {
-    "use strict";
+  (...modules) => {
+    const [
+      BaseController,
+      JSONModel,
+      Filter,
+      FilterOperator,
+      FilterType,
+      Dialog,
+      MessageBox,
+      Button,
+      Text
+    ] = modules;
 
     return BaseController.extend("ui5learning.controller.Main", {
       onInit() {
         const view = this.getView();
         const booksModel = this.getModel("books");
+
+        view.setModel(
+          new JSONModel({
+            titleFilter: "",
+            selectedGenre: "",
+            hasSelection: false,
+            genres: []
+          }),
+          "view"
+        );
 
         view.setBusy(true);
         booksModel.dataLoaded().then(() => {
@@ -48,11 +62,11 @@ sap.ui.define(
 
       onFilter() {
         const table = this.byId("booksTable");
-        const booksModel = this.getModel("books");
+        const viewModel = this.getModel("view");
         // const title = this.byId("titleFilterInput").getValue().trim();
-        const title = booksModel.getProperty("/filterInput").trim();
+        const title = viewModel.getProperty("/titleFilter").trim();
         //  const genre = this.byId("genreFilterSelect").getSelectedKey();
-        const genre = booksModel.getProperty("/selectedGenre");
+        const genre = viewModel.getProperty("/selectedGenre");
         const filters = [];
 
         if (title) {
@@ -94,9 +108,7 @@ sap.ui.define(
           Author: "",
           Genre: "",
           ReleaseDate: null,
-          AvailableQuantity: null,
-          EditMode: false,
-          DraftTitle: ""
+          AvailableQuantity: null
         };
 
         booksModel.setProperty("/books", [...books, newBook]);
@@ -105,10 +117,10 @@ sap.ui.define(
 
       onSelectionChange() {
         const table = this.byId("booksTable");
-        const booksModel = this.getModel("books");
+        const viewModel = this.getModel("view");
         const hasSelection = table.getSelectedContexts().length > 0;
 
-        booksModel.setProperty("/hasSelection", hasSelection);
+        viewModel.setProperty("/hasSelection", hasSelection);
       },
 
       onDeleteRecord() {
@@ -253,11 +265,12 @@ sap.ui.define(
         }));
 
         const allGenresText = this.getResourceBundle().getText("allGenres");
+        const viewModel = this.getModel("view");
 
         // const selectedGenre = this.byId("genreFilterSelect").getSelectedKey();
-        const selectedGenre = booksModel.getProperty("/selectedGenre");
+        const selectedGenre = viewModel.getProperty("/selectedGenre");
 
-        booksModel.setProperty("/genres", [
+        viewModel.setProperty("/genres", [
           { key: "", text: allGenresText },
           ...genreItems
         ]);
@@ -270,10 +283,10 @@ sap.ui.define(
       _resetFilters() {
         // this.byId("titleFilterInput").setValue("");
         // this.byId("genreFilterSelect").setSelectedKey("");
-        const booksModel = this.getModel("books");
+        const viewModel = this.getModel("view");
 
-        booksModel.setProperty("/filterInput", "");
-        booksModel.setProperty("/selectedGenre", "");
+        viewModel.setProperty("/titleFilter", "");
+        viewModel.setProperty("/selectedGenre", "");
 
         this.onFilter();
       }
