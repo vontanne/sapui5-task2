@@ -14,7 +14,7 @@
                 items="{books>/books}">
 
                 <headerToolbar>
-                    <Toolbar id="booksToolbar" enabled="false">
+                    <Toolbar id="booksToolbar" enabled="{view>/booksLoaded}">
                         <content>
                             <Title
                                 id="booksToolbarTitle"

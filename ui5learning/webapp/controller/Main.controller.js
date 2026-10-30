@@ -29,16 +29,15 @@ sap.ui.define(
       onInit() {
         const view = this.getView();
         const booksModel = this.getModel("books");
+        const viewModel = new JSONModel({
+          titleFilter: "",
+          selectedGenre: "",
+          hasSelection: false,
+          genres: [],
+          booksLoaded: false
+        });
 
-        view.setModel(
-          new JSONModel({
-            titleFilter: "",
-            selectedGenre: "",
-            hasSelection: false,
-            genres: []
-          }),
-          "view"
-        );
+        view.setModel(viewModel, "view");
 
         view.setBusy(true);
         booksModel.dataLoaded().then(() => {
@@ -56,7 +55,7 @@ sap.ui.define(
           }
 
           this._updateGenres();
-          this.byId("booksToolbar").setEnabled(true);
+          viewModel.setProperty("/booksLoaded", true);
         });
       },
 
@@ -74,8 +73,7 @@ sap.ui.define(
             new Filter({
               path: "Name",
               operator: FilterOperator.Contains,
-              value1: title,
-              caseSensitive: false
+              value1: title
             })
           );
         }
@@ -91,11 +89,8 @@ sap.ui.define(
           );
         }
 
-        const tableFilters =
-          filters.length > 0 ? [new Filter({ filters, and: true })] : [];
-
         table.removeSelections(true, true);
-        table.getBinding("items").filter(tableFilters, FilterType.Application);
+        table.getBinding("items").filter(filters, FilterType.Application);
       },
 
       onAddRecord() {
@@ -145,8 +140,7 @@ sap.ui.define(
           ariaDescribedBy: message,
           initialFocus: noButton,
           beginButton: yesButton,
-          endButton: noButton,
-          afterClose: () => dialog.destroy()
+          endButton: noButton
         });
 
         yesButton.attachPress(() => {
@@ -155,6 +149,7 @@ sap.ui.define(
         });
 
         noButton.attachPress(() => dialog.close());
+        dialog.attachAfterClose(() => dialog.destroy());
 
         this.getView().addDependent(dialog);
         dialog.open();
@@ -227,23 +222,21 @@ sap.ui.define(
 
       onEditTitle(event) {
         const context = event.getSource().getBindingContext("books");
-        const rowPath = context.getPath();
         const booksModel = this.getModel("books");
-        const title = booksModel.getProperty(`${rowPath}/Name`);
+        const title = context.getProperty("Name");
 
-        booksModel.setProperty(`${rowPath}/DraftTitle`, title);
-        booksModel.setProperty(`${rowPath}/EditMode`, true);
+        booksModel.setProperty("DraftTitle", title, context);
+        booksModel.setProperty("EditMode", true, context);
       },
 
       onSaveTitle(event) {
         const table = this.byId("booksTable");
         const context = event.getSource().getBindingContext("books");
-        const rowPath = context.getPath();
         const booksModel = this.getModel("books");
-        const title = booksModel.getProperty(`${rowPath}/DraftTitle`);
+        const title = context.getProperty("DraftTitle");
 
-        booksModel.setProperty(`${rowPath}/Name`, title);
-        booksModel.setProperty(`${rowPath}/EditMode`, false);
+        booksModel.setProperty("Name", title, context);
+        booksModel.setProperty("EditMode", false, context);
 
         table.getBinding("items").refresh(true);
         this.onSelectionChange();
