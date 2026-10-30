@@ -38,11 +38,13 @@
   },
   "sap.ui5": {
     "flexEnabled": true,
+    "handleValidation": false,
     "dependencies": {
       "minUI5Version": "1.153.0",
       "libs": {
         "sap.m": {},
-        "sap.ui.core": {}
+        "sap.ui.core": {},
+        "sap.ui.layout": {}
       }
     },
     "contentDensities": {

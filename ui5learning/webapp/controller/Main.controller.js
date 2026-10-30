@@ -10,7 +10,8 @@ sap.ui.define(
     "sap/m/Dialog",
     "sap/m/MessageBox",
     "sap/m/Button",
-    "sap/m/Text"
+    "sap/m/Text",
+    "sap/ui/core/date/UI5Date"
   ],
   (...modules) => {
     const [
@@ -22,7 +23,8 @@ sap.ui.define(
       Dialog,
       MessageBox,
       Button,
-      Text
+      Text,
+      UI5Date
     ] = modules;
 
     return BaseController.extend("ui5learning.controller.Main", {
@@ -93,21 +95,110 @@ sap.ui.define(
         table.getBinding("items").filter(filters, FilterType.Application);
       },
 
-      onAddRecord() {
-        const booksModel = this.getModel("books");
-        const books = booksModel.getProperty("/books");
+      async onAddRecord() {
+        const viewModel = this.getModel("view");
 
-        const newBook = {
-          ID: "",
+        viewModel.setProperty("/newBook", {
           Name: "",
           Author: "",
           Genre: "",
           ReleaseDate: null,
           AvailableQuantity: null
+        });
+        viewModel.setProperty("/maxReleaseDate", UI5Date.getInstance());
+
+        // Keep the pending load, so a double click does not load the dialog twice
+        if (!this._addBookDialog) {
+          this._addBookDialog = this.loadFragment({
+            name: "ui5learning.view.AddBookDialog"
+          });
+        }
+
+        const dialog = await this._addBookDialog;
+        dialog.open();
+      },
+
+      onConfirmAddBook() {
+        const fields = [
+          "newBookNameInput",
+          "newBookAuthorInput",
+          "newBookGenreInput",
+          "newBookReleaseDatePicker",
+          "newBookQuantityInput"
+        ].map((id) => this.byId(id));
+
+        const invalidFields = fields.filter(
+          (field) => !this._validateField(field)
+        );
+
+        if (invalidFields.length > 0) {
+          return;
+        }
+
+        const viewModel = this.getModel("view");
+        const booksModel = this.getModel("books");
+        const books = booksModel.getProperty("/books");
+        const draft = viewModel.getProperty("/newBook");
+        const maxId = Math.max(0, ...books.map((book) => Number(book.ID)));
+
+        const newBook = {
+          ID: String(maxId + 1),
+          Name: draft.Name.trim(),
+          Author: draft.Author.trim(),
+          Genre: draft.Genre.trim(),
+          ReleaseDate: draft.ReleaseDate,
+          AvailableQuantity: draft.AvailableQuantity
         };
 
         booksModel.setProperty("/books", [...books, newBook]);
+        this._updateGenres();
         this._resetFilters();
+
+        this.byId("addBookDialog").close();
+      },
+
+      onCancelAddBook() {
+        this.byId("addBookDialog").close();
+      },
+
+      onAddBookDialogAfterClose() {
+        this.byId("addBookDialog").destroy();
+        this._addBookDialog = null;
+      },
+
+      onFieldChange(event) {
+        this._validateField(event.getSource());
+      },
+
+      _validateField(field) {
+        const errorText = this._getFieldError(field);
+
+        field.setValueState(errorText ? "Error" : "None");
+        field.setValueStateText(errorText);
+
+        return !errorText;
+      },
+
+      _getFieldError(field) {
+        const value = field.getValue();
+
+        if (!value.trim()) {
+          return this.getResourceBundle().getText("requiredFieldError");
+        }
+
+        const type = field.getBinding("value").getType();
+
+        try {
+          type.validateValue(type.parseValue(value, "string"));
+        } catch (error) {
+          return error.message;
+        }
+
+        if (field.isA("sap.m.DatePicker") && !field.isValidValue()) {
+          return this.getResourceBundle().getText("futureDateError");
+        }
+
+        return "";
       },
 
       onSelectionChange() {
@@ -221,25 +312,40 @@ sap.ui.define(
       */
 
       onEditTitle(event) {
-        const context = event.getSource().getBindingContext("books");
+        const editButton = event.getSource();
+        const context = editButton.getBindingContext("books");
         const booksModel = this.getModel("books");
         const title = context.getProperty("Name");
 
+        this._getTitleInput(editButton).setValueState("None");
         booksModel.setProperty("DraftTitle", title, context);
         booksModel.setProperty("EditMode", true, context);
       },
 
       onSaveTitle(event) {
+        const saveButton = event.getSource();
+
+        if (!this._validateField(this._getTitleInput(saveButton))) {
+          return;
+        }
+
         const table = this.byId("booksTable");
-        const context = event.getSource().getBindingContext("books");
+        const context = saveButton.getBindingContext("books");
         const booksModel = this.getModel("books");
-        const title = context.getProperty("DraftTitle");
+        const title = context.getProperty("DraftTitle").trim();
 
         booksModel.setProperty("Name", title, context);
         booksModel.setProperty("EditMode", false, context);
 
         table.getBinding("items").refresh(true);
         this.onSelectionChange();
+      },
+
+      _getTitleInput(button) {
+        const row = button.getParent().getParent();
+        const isInput = (control) => control.isA("sap.m.Input");
+
+        return row.findAggregatedObjects(true, isInput)[0];
       },
 
       _updateGenres() {
