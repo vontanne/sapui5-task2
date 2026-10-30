@@ -108,14 +108,14 @@ sap.ui.define(
         viewModel.setProperty("/maxReleaseDate", UI5Date.getInstance());
 
         // Keep the pending load, so a double click does not load the dialog twice
-        if (!this._addBookDialog) {
-          this._addBookDialog = this.loadFragment({
+        if (!this._addBookDialogLoading) {
+          this._addBookDialogLoading = this.loadFragment({
             name: "ui5learning.view.AddBookDialog"
           });
         }
 
-        const dialog = await this._addBookDialog;
-        dialog.open();
+        this._addBookDialog = await this._addBookDialogLoading;
+        this._addBookDialog.open();
       },
 
       onConfirmAddBook() {
@@ -154,16 +154,17 @@ sap.ui.define(
         this._updateGenres();
         this._resetFilters();
 
-        this.byId("addBookDialog").close();
+        this._addBookDialog.close();
       },
 
       onCancelAddBook() {
-        this.byId("addBookDialog").close();
+        this._addBookDialog.close();
       },
 
       onAddBookDialogAfterClose() {
-        this.byId("addBookDialog").destroy();
+        this._addBookDialog.destroy();
         this._addBookDialog = null;
+        this._addBookDialogLoading = null;
       },
 
       onFieldChange(event) {
