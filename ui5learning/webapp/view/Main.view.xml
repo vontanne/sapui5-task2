@@ -106,11 +106,19 @@
                                     visible="{= !%{books>EditMode} }" />
                                 <Input
                                     id="bookTitleInput"
-                                    value="{books>DraftTitle}"
+                                    core:require="{ StringType: 'sap/ui/model/type/String' }"
+                                    value="{
+                                        path: 'books>DraftTitle',
+                                        type: 'StringType',
+                                        constraints: {
+                                            maxLength: 255
+                                        }
+                                    }"
                                     valueLiveUpdate="true"
                                     visible="{= !!%{books>EditMode} }"
                                     width="100%"
-                                    ariaLabelledBy="bookNameHeader" />
+                                    ariaLabelledBy="bookNameHeader"
+                                    change=".onFieldChange" />
                             </VBox>
                             <Text id="bookAuthorCell" text="{books>Author}" />
                             <Text id="bookGenreCell" text="{books>Genre}" />

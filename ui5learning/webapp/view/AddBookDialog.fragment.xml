@@ -1,0 +1,120 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+
+    <Dialog
+        id="addBookDialog"
+        core:require="{
+            StringType: 'sap/ui/model/type/String',
+            DateType: 'sap/ui/model/type/Date',
+            IntegerType: 'sap/ui/model/type/Integer'
+        }"
+        title="{i18n>addBookTitle}"
+        contentWidth="40rem"
+        afterClose=".onAddBookDialogAfterClose">
+
+        <content>
+            <form:SimpleForm
+                id="addBookForm"
+                editable="true"
+                layout="ColumnLayout">
+
+                <Label
+                    id="newBookNameLabel"
+                    text="{i18n>bookName}"
+                    required="true" />
+                <Input
+                    id="newBookNameInput"
+                    value="{
+                        path: 'view>/newBook/Name',
+                        type: 'StringType',
+                        constraints: {
+                            maxLength: 255
+                        }
+                    }"
+                    change=".onFieldChange" />
+
+                <Label
+                    id="newBookAuthorLabel"
+                    text="{i18n>bookAuthor}"
+                    required="true" />
+                <Input
+                    id="newBookAuthorInput"
+                    value="{
+                        path: 'view>/newBook/Author',
+                        type: 'StringType',
+                        constraints: {
+                            maxLength: 255
+                        }
+                    }"
+                    change=".onFieldChange" />
+
+                <Label
+                    id="newBookGenreLabel"
+                    text="{i18n>bookGenre}"
+                    required="true" />
+                <Input
+                    id="newBookGenreInput"
+                    value="{
+                        path: 'view>/newBook/Genre',
+                        type: 'StringType',
+                        constraints: {
+                            maxLength: 255
+                        }
+                    }"
+                    change=".onFieldChange" />
+
+                <Label
+                    id="newBookReleaseDateLabel"
+                    text="{i18n>bookReleaseDate}"
+                    required="true" />
+                <DatePicker
+                    id="newBookReleaseDatePicker"
+                    value="{
+                        path: 'view>/newBook/ReleaseDate',
+                        type: 'DateType',
+                        formatOptions: {
+                            source: {
+                                pattern: 'yyyy-MM-dd'
+                            },
+                            style: 'medium',
+                            strictParsing: true
+                        }
+                    }"
+                    maxDate="{view>/maxReleaseDate}"
+                    change=".onFieldChange" />
+
+                <Label
+                    id="newBookQuantityLabel"
+                    text="{i18n>bookAvailableQuantity}"
+                    required="true" />
+                <Input
+                    id="newBookQuantityInput"
+                    value="{
+                        path: 'view>/newBook/AvailableQuantity',
+                        type: 'IntegerType',
+                        constraints: {
+                            minimum: 0
+                        }
+                    }"
+                    change=".onFieldChange" />
+            </form:SimpleForm>
+        </content>
+
+        <beginButton>
+            <Button
+                id="confirmAddBookButton"
+                text="{i18n>addBookConfirm}"
+                type="Emphasized"
+                press=".onConfirmAddBook" />
+        </beginButton>
+
+        <endButton>
+            <Button
+                id="cancelAddBookButton"
+                text="{i18n>addBookCancel}"
+                press=".onCancelAddBook" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
