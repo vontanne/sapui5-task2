@@ -125,16 +125,11 @@
 
                             <Text
                                 id="bookReleaseDateCell"
-                                core:require="{ DateType: 'sap/ui/model/type/Date' }"
+                                core:require="{ Formatter: 'ui5learning/model/formatter' }"
                                 text="{
                                     path: 'books>ReleaseDate',
-                                    type: 'DateType',
-                                    formatOptions: {
-                                        source: {
-                                            pattern: 'yyyy-MM-dd'
-                                        },
-                                        style: 'medium'
-                                    }
+                                    targetType: 'any',
+                                    formatter: 'Formatter.publishedYear.bind($controller)'
                                 }" />
 
                             <ObjectNumber
