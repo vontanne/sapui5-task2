@@ -31,11 +31,11 @@ server:
       configuration:
         mountPath: /
         services:
-          - urlPath: /V2/OData/OData.svc
+          - urlPath: /V2/OData/ODataSVC
             metadataPath: ./webapp/localService/metadataV2.xml
             mockdataPath: ./webapp/localService/dataV2
             generateMockData: true
-          - urlPath: /V4/OData/OData.svc
+          - urlPath: /V4/OData/ODataSVC
             metadataPath: ./webapp/localService/metadataV4.xml
             mockdataPath: ./webapp/localService/dataV4
             generateMockData: true

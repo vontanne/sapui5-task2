@@ -21,7 +21,7 @@
     },
     "dataSources": {
       "demoServiceV2": {
-        "uri": "/V2/OData/OData.svc/",
+        "uri": "/V2/OData/ODataSVC/",
         "type": "OData",
         "settings": {
           "odataVersion": "2.0",
@@ -29,7 +29,7 @@
         }
       },
       "demoServiceV4": {
-        "uri": "/V4/OData/OData.svc/",
+        "uri": "/V4/OData/ODataSVC/",
         "type": "OData",
         "settings": {
           "odataVersion": "4.0",
