@@ -7,152 +7,303 @@
 
     <Page id="page" title="{i18n>title}">
         <content>
-            <Table
-                id="booksTable"
-                mode="MultiSelect"
-                selectionChange=".onSelectionChange"
-                items="{books>/books}">
-
-                <headerToolbar>
-                    <Toolbar id="booksToolbar" enabled="{view>/booksLoaded}">
-                        <content>
-                            <Title
-                                id="booksToolbarTitle"
-                                text="{i18n>booksTableTitle}" />
-                            <Button
-                                id="addRecordButton"
-                                text="{i18n>addRecord}"
-                                press=".onAddRecord" />
-                            <Button
-                                id="deleteRecordButton"
-                                text="{i18n>deleteRecord}"
-                                enabled="{view>/hasSelection}"
-                                press=".onDeleteRecord" />
-                            <ToolbarSeparator id="booksToolbarSeparator" />
-                            <Label
-                                id="titleFilterLabel"
-                                text="{i18n>titleFilterLabel}"
-                                labelFor="titleFilterInput" />
-                            <Input
-                                id="titleFilterInput"
-                                width="14rem"
-                                placeholder="{i18n>titleFilterPlaceholder}"
-                                value="{view>/titleFilter}" />
-
-                            <Label
-                                id="genreFilterLabel"
-                                text="{i18n>bookGenre}"
-                                labelFor="genreFilterSelect" />
-
-                            <Select
-                                id="genreFilterSelect"
-                                selectedKey="{view>/selectedGenre}"
-                                items="{view>/genres}">
-                                <core:Item
-                                    id="genreFilterItem"
-                                    key="{view>key}"
-                                    text="{view>text}" />
-                            </Select>
-                            <Button
-                                id="filterBooksButton"
-                                text="{i18n>filterBooks}"
-                                press=".onFilter" />
-                        </content>
-                    </Toolbar>
-                </headerToolbar>
-
-                <columns>
-                    <Column id="bookIdColumn">
-                        <Text id="bookIdHeader" text="{i18n>bookId}" />
-                    </Column>
-
-                    <Column id="bookNameColumn">
-                        <Text id="bookNameHeader" text="{i18n>bookName}" />
-                    </Column>
-
-                    <Column id="bookAuthorColumn">
-                        <Text id="bookAuthorHeader" text="{i18n>bookAuthor}" />
-                    </Column>
-
-                    <Column id="bookGenreColumn">
-                        <Text id="bookGenreHeader" text="{i18n>bookGenre}" />
-                    </Column>
-
-                    <Column id="bookReleaseDateColumn">
-                        <Text
-                            id="bookReleaseDateHeader"
-                            text="{i18n>bookReleaseDate}" />
-                    </Column>
-
-                    <Column id="bookQuantityColumn" hAlign="End">
-                        <Text
-                            id="bookQuantityHeader"
-                            text="{i18n>bookAvailableQuantity}" />
-                    </Column>
-
-                    <Column id="bookActionsColumn" width="9rem">
-                        <Text id="bookActionsHeader" text="{i18n>actions}" />
-                    </Column>
-                </columns>
-
+            <IconTabBar id="modelTabBar">
                 <items>
-                    <ColumnListItem id="bookRow">
-                        <cells>
-                            <Text id="bookIdCell" text="{books>ID}" />
-                            <VBox id="bookNameCellContainer" width="100%">
-                                <Text
-                                    id="bookNameCell"
-                                    text="{books>Name}"
-                                    visible="{= !%{books>EditMode} }" />
-                                <Input
-                                    id="bookTitleInput"
-                                    core:require="{ StringType: 'sap/ui/model/type/String' }"
-                                    value="{
-                                        path: 'books>DraftTitle',
-                                        type: 'StringType',
-                                        constraints: {
-                                            maxLength: 255
-                                        }
-                                    }"
-                                    valueLiveUpdate="true"
-                                    visible="{= !!%{books>EditMode} }"
-                                    width="100%"
-                                    ariaLabelledBy="bookNameHeader"
-                                    change=".onFieldChange" />
-                            </VBox>
-                            <Text id="bookAuthorCell" text="{books>Author}" />
-                            <Text id="bookGenreCell" text="{books>Genre}" />
+                    <IconTabFilter
+                        id="jsonModelTab"
+                        text="{i18n>jsonModelTab}">
+                        <content>
+                            <Table
+                                id="booksTable"
+                                mode="MultiSelect"
+                                selectionChange=".onSelectionChange"
+                                items="{books>/books}">
 
-                            <Text
-                                id="bookReleaseDateCell"
-                                core:require="{ Formatter: 'ui5learning/model/formatter' }"
-                                text="{
-                                    path: 'books>ReleaseDate',
-                                    targetType: 'any',
-                                    formatter: 'Formatter.publishedYear.bind($controller)'
-                                }" />
+                                <headerToolbar>
+                                    <Toolbar id="booksToolbar" enabled="{view>/booksLoaded}">
+                                        <content>
+                                            <Title
+                                                id="booksToolbarTitle"
+                                                text="{i18n>booksTableTitle}" />
+                                            <Button
+                                                id="addRecordButton"
+                                                text="{i18n>addRecord}"
+                                                press=".onAddRecord" />
+                                            <Button
+                                                id="deleteRecordButton"
+                                                text="{i18n>deleteRecord}"
+                                                enabled="{view>/hasSelection}"
+                                                press=".onDeleteRecord" />
+                                            <ToolbarSeparator id="booksToolbarSeparator" />
+                                            <Label
+                                                id="titleFilterLabel"
+                                                text="{i18n>titleFilterLabel}"
+                                                labelFor="titleFilterInput" />
+                                            <Input
+                                                id="titleFilterInput"
+                                                width="14rem"
+                                                placeholder="{i18n>titleFilterPlaceholder}"
+                                                value="{view>/titleFilter}" />
 
-                            <ObjectNumber
-                                id="bookQuantityCell"
-                                number="{books>AvailableQuantity}"
-                                emphasized="false" />
+                                            <Label
+                                                id="genreFilterLabel"
+                                                text="{i18n>bookGenre}"
+                                                labelFor="genreFilterSelect" />
 
-                            <HBox id="bookActionsCell">
-                                <Button
-                                    id="editTitleButton"
-                                    text="{i18n>editTitle}"
-                                    visible="{= !%{books>EditMode} }"
-                                    press=".onEditTitle" />
-                                <Button
-                                    id="saveTitleButton"
-                                    text="{i18n>save}"
-                                    visible="{= !!%{books>EditMode} }"
-                                    press=".onSaveTitle" />
-                            </HBox>
-                        </cells>
-                    </ColumnListItem>
+                                            <Select
+                                                id="genreFilterSelect"
+                                                selectedKey="{view>/selectedGenre}"
+                                                items="{view>/genres}">
+                                                <core:Item
+                                                    id="genreFilterItem"
+                                                    key="{view>key}"
+                                                    text="{view>text}" />
+                                            </Select>
+                                            <Button
+                                                id="filterBooksButton"
+                                                text="{i18n>filterBooks}"
+                                                press=".onFilter" />
+                                        </content>
+                                    </Toolbar>
+                                </headerToolbar>
+
+                                <columns>
+                                    <Column id="bookIdColumn">
+                                        <Text id="bookIdHeader" text="{i18n>bookId}" />
+                                    </Column>
+
+                                    <Column id="bookNameColumn">
+                                        <Text id="bookNameHeader" text="{i18n>bookName}" />
+                                    </Column>
+
+                                    <Column id="bookAuthorColumn">
+                                        <Text id="bookAuthorHeader" text="{i18n>bookAuthor}" />
+                                    </Column>
+
+                                    <Column id="bookGenreColumn">
+                                        <Text id="bookGenreHeader" text="{i18n>bookGenre}" />
+                                    </Column>
+
+                                    <Column id="bookReleaseDateColumn">
+                                        <Text
+                                            id="bookReleaseDateHeader"
+                                            text="{i18n>bookReleaseDate}" />
+                                    </Column>
+
+                                    <Column id="bookQuantityColumn" hAlign="End">
+                                        <Text
+                                            id="bookQuantityHeader"
+                                            text="{i18n>bookAvailableQuantity}" />
+                                    </Column>
+
+                                    <Column id="bookActionsColumn" width="9rem">
+                                        <Text id="bookActionsHeader" text="{i18n>actions}" />
+                                    </Column>
+                                </columns>
+
+                                <items>
+                                    <ColumnListItem id="bookRow">
+                                        <cells>
+                                            <Text id="bookIdCell" text="{books>ID}" />
+                                            <VBox id="bookNameCellContainer" width="100%">
+                                                <Text
+                                                    id="bookNameCell"
+                                                    text="{books>Name}"
+                                                    visible="{= !%{books>EditMode} }" />
+                                                <Input
+                                                    id="bookTitleInput"
+                                                    core:require="{ StringType: 'sap/ui/model/type/String' }"
+                                                    value="{
+                                                        path: 'books>DraftTitle',
+                                                        type: 'StringType',
+                                                        constraints: {
+                                                            maxLength: 255
+                                                        }
+                                                    }"
+                                                    valueLiveUpdate="true"
+                                                    visible="{= !!%{books>EditMode} }"
+                                                    width="100%"
+                                                    ariaLabelledBy="bookNameHeader"
+                                                    change=".onFieldChange" />
+                                            </VBox>
+                                            <Text id="bookAuthorCell" text="{books>Author}" />
+                                            <Text id="bookGenreCell" text="{books>Genre}" />
+
+                                            <Text
+                                                id="bookReleaseDateCell"
+                                                core:require="{ Formatter: 'ui5learning/model/formatter' }"
+                                                text="{
+                                                    path: 'books>ReleaseDate',
+                                                    targetType: 'any',
+                                                    formatter: 'Formatter.publishedYear.bind($controller)'
+                                                }" />
+
+                                            <ObjectNumber
+                                                id="bookQuantityCell"
+                                                number="{books>AvailableQuantity}"
+                                                emphasized="false" />
+
+                                            <HBox id="bookActionsCell">
+                                                <Button
+                                                    id="editTitleButton"
+                                                    text="{i18n>editTitle}"
+                                                    visible="{= !%{books>EditMode} }"
+                                                    press=".onEditTitle" />
+                                                <Button
+                                                    id="saveTitleButton"
+                                                    text="{i18n>save}"
+                                                    visible="{= !!%{books>EditMode} }"
+                                                    press=".onSaveTitle" />
+                                            </HBox>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </content>
+                    </IconTabFilter>
+                    <IconTabFilter
+                        id="odataV2ModelTab"
+                        text="{i18n>odataV2ModelTab}">
+                        <content>
+                            <Table
+                                id="productsV2Table"
+                                core:require="{ DateTimeType: 'sap/ui/model/odata/type/DateTime' }"
+                                items="{demoV2>/Products}"
+                                growing="true">
+
+                                <columns>
+                                    <Column id="productV2IdColumn">
+                                        <Text id="productV2IdHeader" text="{i18n>productId}" />
+                                    </Column>
+
+                                    <Column id="productV2NameColumn">
+                                        <Text id="productV2NameHeader" text="{i18n>productName}" />
+                                    </Column>
+
+                                    <Column id="productV2DescriptionColumn">
+                                        <Text
+                                            id="productV2DescriptionHeader"
+                                            text="{i18n>productDescription}" />
+                                    </Column>
+
+                                    <Column id="productV2ReleaseDateColumn">
+                                        <Text
+                                            id="productV2ReleaseDateHeader"
+                                            text="{i18n>productReleaseDate}" />
+                                    </Column>
+
+                                    <Column id="productV2DiscontinuedDateColumn">
+                                        <Text
+                                            id="productV2DiscontinuedDateHeader"
+                                            text="{i18n>productDiscontinuedDate}" />
+                                    </Column>
+
+                                    <Column id="productV2RatingColumn">
+                                        <Text id="productV2RatingHeader" text="{i18n>productRating}" />
+                                    </Column>
+
+                                    <Column id="productV2PriceColumn">
+                                        <Text id="productV2PriceHeader" text="{i18n>productPrice}" />
+                                    </Column>
+                                </columns>
+
+                                <items>
+                                    <ColumnListItem id="productV2Row">
+                                        <cells>
+                                            <Text id="productV2IdCell" text="{demoV2>ID}" />
+                                            <Text id="productV2NameCell" text="{demoV2>Name}" />
+                                            <Text
+                                                id="productV2DescriptionCell"
+                                                text="{demoV2>Description}" />
+                                            <Text
+                                                id="productV2ReleaseDateCell"
+                                                text="{
+                                                    path: 'demoV2>ReleaseDate',
+                                                    type: 'DateTimeType'
+                                                }" />
+                                            <Text
+                                                id="productV2DiscontinuedDateCell"
+                                                text="{
+                                                    path: 'demoV2>DiscontinuedDate',
+                                                    type: 'DateTimeType'
+                                                }" />
+                                            <Text id="productV2RatingCell" text="{demoV2>Rating}" />
+                                            <Text id="productV2PriceCell" text="{demoV2>Price}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </content>
+                    </IconTabFilter>
+                    <IconTabFilter
+                        id="odataV4ModelTab"
+                        text="{i18n>odataV4ModelTab}">
+                        <content>
+                            <Table
+                                id="productsV4Table"
+                                items="{demoV4>/Products}"
+                                growing="true">
+
+                                <columns>
+                                    <Column id="productV4IdColumn">
+                                        <Text id="productV4IdHeader" text="{i18n>productId}" />
+                                    </Column>
+
+                                    <Column id="productV4NameColumn">
+                                        <Text id="productV4NameHeader" text="{i18n>productName}" />
+                                    </Column>
+
+                                    <Column id="productV4DescriptionColumn">
+                                        <Text
+                                            id="productV4DescriptionHeader"
+                                            text="{i18n>productDescription}" />
+                                    </Column>
+
+                                    <Column id="productV4ReleaseDateColumn">
+                                        <Text
+                                            id="productV4ReleaseDateHeader"
+                                            text="{i18n>productReleaseDate}" />
+                                    </Column>
+
+                                    <Column id="productV4DiscontinuedDateColumn">
+                                        <Text
+                                            id="productV4DiscontinuedDateHeader"
+                                            text="{i18n>productDiscontinuedDate}" />
+                                    </Column>
+
+                                    <Column id="productV4RatingColumn">
+                                        <Text id="productV4RatingHeader" text="{i18n>productRating}" />
+                                    </Column>
+
+                                    <Column id="productV4PriceColumn">
+                                        <Text id="productV4PriceHeader" text="{i18n>productPrice}" />
+                                    </Column>
+                                </columns>
+
+                                <items>
+                                    <ColumnListItem id="productV4Row">
+                                        <cells>
+                                            <Text id="productV4IdCell" text="{demoV4>ID}" />
+                                            <Text id="productV4NameCell" text="{demoV4>Name}" />
+                                            <Text
+                                                id="productV4DescriptionCell"
+                                                text="{demoV4>Description}" />
+                                            <Text
+                                                id="productV4ReleaseDateCell"
+                                                text="{demoV4>ReleaseDate}" />
+                                            <Text
+                                                id="productV4DiscontinuedDateCell"
+                                                text="{demoV4>DiscontinuedDate}" />
+                                            <Text id="productV4RatingCell" text="{demoV4>Rating}" />
+                                            <Text id="productV4PriceCell" text="{demoV4>Price}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </content>
+                    </IconTabFilter>
                 </items>
-            </Table>
+            </IconTabBar>
         </content>
     </Page>
 </mvc:View>
