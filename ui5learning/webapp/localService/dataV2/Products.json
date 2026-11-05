@@ -4,7 +4,7 @@
     "Name": "Bread",
     "Description": "Whole grain bread",
     "ReleaseDate": "/Date(694224000000)/",
-    "DiscontinuedDate": null,
+    "DiscontinuedDate": "",
     "Rating": 4,
     "Price": "2.5"
   },
@@ -13,7 +13,7 @@
     "Name": "Milk",
     "Description": "Low fat milk",
     "ReleaseDate": "/Date(812505600000)/",
-    "DiscontinuedDate": null,
+    "DiscontinuedDate": "",
     "Rating": 3,
     "Price": "3.5"
   },
@@ -22,7 +22,7 @@
     "Name": "Vint soda",
     "Description": "Americana Variety - Mix of 6 flavors",
     "ReleaseDate": "/Date(970358400000)/",
-    "DiscontinuedDate": null,
+    "DiscontinuedDate": "",
     "Rating": 3,
     "Price": "20.9"
   },
@@ -40,7 +40,7 @@
     "Name": "Fruit Punch",
     "Description": "Mango flavor, 8.3 Ounce Cans (Pack of 24)",
     "ReleaseDate": "/Date(1041724800000)/",
-    "DiscontinuedDate": null,
+    "DiscontinuedDate": "",
     "Rating": 3,
     "Price": "22.99"
   },
@@ -49,7 +49,7 @@
     "Name": "Cranberry Juice",
     "Description": "16-Ounce Plastic Bottles (Pack of 12)",
     "ReleaseDate": "/Date(1154649600000)/",
-    "DiscontinuedDate": null,
+    "DiscontinuedDate": "",
     "Rating": 3,
     "Price": "22.8"
   },
@@ -58,7 +58,7 @@
     "Name": "Pink Lemonade",
     "Description": "36 Ounce Cans (Pack of 3)",
     "ReleaseDate": "/Date(1162684800000)/",
-    "DiscontinuedDate": null,
+    "DiscontinuedDate": "",
     "Rating": 3,
     "Price": "18.8"
   },
@@ -67,7 +67,7 @@
     "Name": "DVD Player",
     "Description": "1080P Upconversion DVD Player",
     "ReleaseDate": "/Date(1163548800000)/",
-    "DiscontinuedDate": null,
+    "DiscontinuedDate": "",
     "Rating": 3,
     "Price": "35.88"
   },
@@ -76,7 +76,7 @@
     "Name": "LCD HDTV",
     "Description": "42 inch 1080p LCD with Built-in Blu-ray Disc Player",
     "ReleaseDate": "/Date(1210204800000)/",
-    "DiscontinuedDate": null,
+    "DiscontinuedDate": "",
     "Rating": 3,
     "Price": "1088.8"
   }
