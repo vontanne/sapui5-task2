@@ -34,11 +34,11 @@ server:
           - urlPath: /V2/OData/ODataSVC
             metadataPath: ./webapp/localService/metadataV2.xml
             mockdataPath: ./webapp/localService/dataV2
-            generateMockData: true
+            generateMockData: false
           - urlPath: /V4/OData/ODataSVC
             metadataPath: ./webapp/localService/metadataV4.xml
             mockdataPath: ./webapp/localService/dataV4
-            generateMockData: true
+            generateMockData: false
         annotations: []
 builder:
   resources:
