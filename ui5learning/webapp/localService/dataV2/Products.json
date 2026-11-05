@@ -1,20 +1,5 @@
 [
   {
-    "__metadata": {
-      "id": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(0)",
-      "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(0)",
-      "type": "ODataDemo.Product"
-    },
-    "Category": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(0)/Category"
-      }
-    },
-    "Supplier": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(0)/Supplier"
-      }
-    },
     "ID": 0,
     "Name": "Bread",
     "Description": "Whole grain bread",
@@ -24,21 +9,6 @@
     "Price": "2.5"
   },
   {
-    "__metadata": {
-      "id": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(1)",
-      "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(1)",
-      "type": "ODataDemo.Product"
-    },
-    "Category": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(1)/Category"
-      }
-    },
-    "Supplier": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(1)/Supplier"
-      }
-    },
     "ID": 1,
     "Name": "Milk",
     "Description": "Low fat milk",
@@ -48,21 +18,6 @@
     "Price": "3.5"
   },
   {
-    "__metadata": {
-      "id": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(2)",
-      "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(2)",
-      "type": "ODataDemo.Product"
-    },
-    "Category": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(2)/Category"
-      }
-    },
-    "Supplier": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(2)/Supplier"
-      }
-    },
     "ID": 2,
     "Name": "Vint soda",
     "Description": "Americana Variety - Mix of 6 flavors",
@@ -72,21 +27,6 @@
     "Price": "20.9"
   },
   {
-    "__metadata": {
-      "id": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(3)",
-      "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(3)",
-      "type": "ODataDemo.Product"
-    },
-    "Category": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(3)/Category"
-      }
-    },
-    "Supplier": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(3)/Supplier"
-      }
-    },
     "ID": 3,
     "Name": "Havina Cola",
     "Description": "The Original Key Lime Cola",
@@ -96,21 +36,6 @@
     "Price": "19.9"
   },
   {
-    "__metadata": {
-      "id": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(4)",
-      "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(4)",
-      "type": "ODataDemo.Product"
-    },
-    "Category": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(4)/Category"
-      }
-    },
-    "Supplier": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(4)/Supplier"
-      }
-    },
     "ID": 4,
     "Name": "Fruit Punch",
     "Description": "Mango flavor, 8.3 Ounce Cans (Pack of 24)",
@@ -120,21 +45,6 @@
     "Price": "22.99"
   },
   {
-    "__metadata": {
-      "id": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(5)",
-      "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(5)",
-      "type": "ODataDemo.Product"
-    },
-    "Category": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(5)/Category"
-      }
-    },
-    "Supplier": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(5)/Supplier"
-      }
-    },
     "ID": 5,
     "Name": "Cranberry Juice",
     "Description": "16-Ounce Plastic Bottles (Pack of 12)",
@@ -144,21 +54,6 @@
     "Price": "22.8"
   },
   {
-    "__metadata": {
-      "id": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(6)",
-      "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(6)",
-      "type": "ODataDemo.Product"
-    },
-    "Category": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(6)/Category"
-      }
-    },
-    "Supplier": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(6)/Supplier"
-      }
-    },
     "ID": 6,
     "Name": "Pink Lemonade",
     "Description": "36 Ounce Cans (Pack of 3)",
@@ -168,21 +63,6 @@
     "Price": "18.8"
   },
   {
-    "__metadata": {
-      "id": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(7)",
-      "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(7)",
-      "type": "ODataDemo.Product"
-    },
-    "Category": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(7)/Category"
-      }
-    },
-    "Supplier": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(7)/Supplier"
-      }
-    },
     "ID": 7,
     "Name": "DVD Player",
     "Description": "1080P Upconversion DVD Player",
@@ -192,21 +72,6 @@
     "Price": "35.88"
   },
   {
-    "__metadata": {
-      "id": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(8)",
-      "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(8)",
-      "type": "ODataDemo.Product"
-    },
-    "Category": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(8)/Category"
-      }
-    },
-    "Supplier": {
-      "__deferred": {
-        "uri": "https://services.odata.org/(S(e2j30ivvdcrso1qd14rx5tjm))/V2/OData/OData.svc/Products(8)/Supplier"
-      }
-    },
     "ID": 8,
     "Name": "LCD HDTV",
     "Description": "42 inch 1080p LCD with Built-in Blu-ray Disc Player",

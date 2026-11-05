@@ -81,7 +81,6 @@
     "Price": 1088.8
   },
   {
-    "@odata.type": "#ODataDemo.FeaturedProduct",
     "ID": 9,
     "Name": "Lemonade",
     "Description": "Classic, refreshing lemonade (Single bottle)",
@@ -91,7 +90,6 @@
     "Price": 1.01
   },
   {
-    "@odata.type": "#ODataDemo.FeaturedProduct",
     "ID": 10,
     "Name": "Coffee",
     "Description": "Bulk size can of instant coffee",
