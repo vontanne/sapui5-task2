@@ -402,24 +402,37 @@ sap.ui.define(
         viewModel.setProperty("/hasProductsV2Selection", hasSelection);
       },
 
-      async onDeleteProductsV2() {
+      onDeleteProductsV2() {
         const table = this.byId("productsV2Table");
         const demoV2Model = this.getModel("demoV2");
         const resourceBundle = this.getResourceBundle();
+        let hasErrors = false;
 
-        const deletions = table
-          .getSelectedContexts()
-          .map((context) => context.delete());
+        table.getSelectedContexts().forEach((context) => {
+          demoV2Model.remove(context.getPath(), {
+            groupId: "changes",
+            error: () => {
+              hasErrors = true;
+            }
+          });
+        });
 
         table.removeSelections(true, true);
-        demoV2Model.submitChanges();
 
-        try {
-          await Promise.all(deletions);
-          MessageToast.show(resourceBundle.getText("deleteProductsSuccess"));
-        } catch {
-          MessageBox.error(resourceBundle.getText("deleteProductsError"));
-        }
+        demoV2Model.submitChanges({
+          success: () => {
+            if (hasErrors) {
+              MessageBox.error(resourceBundle.getText("deleteProductsError"));
+            } else {
+              MessageToast.show(
+                resourceBundle.getText("deleteProductsSuccess")
+              );
+            }
+          },
+          error: () => {
+            MessageBox.error(resourceBundle.getText("deleteProductsError"));
+          }
+        });
       }
     });
   }
