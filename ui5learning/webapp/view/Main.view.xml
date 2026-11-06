@@ -168,8 +168,22 @@
                             <Table
                                 id="productsV2Table"
                                 core:require="{ DateTimeType: 'sap/ui/model/odata/type/DateTime' }"
+                                mode="MultiSelect"
+                                selectionChange=".onProductsV2SelectionChange"
                                 items="{demoV2>/Products}"
                                 growing="true">
+
+                                <headerToolbar>
+                                    <Toolbar id="productsV2Toolbar">
+                                        <content>
+                                            <Button
+                                                id="deleteProductsV2Button"
+                                                text="{i18n>deleteProducts}"
+                                                enabled="{view>/hasProductsV2Selection}"
+                                                press=".onDeleteProductsV2" />
+                                        </content>
+                                    </Toolbar>
+                                </headerToolbar>
 
                                 <columns>
                                     <Column id="productV2IdColumn">

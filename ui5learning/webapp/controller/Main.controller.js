@@ -9,6 +9,7 @@ sap.ui.define(
     "sap/ui/model/FilterType",
     "sap/m/Dialog",
     "sap/m/MessageBox",
+    "sap/m/MessageToast",
     "sap/m/Button",
     "sap/m/Text",
     "sap/ui/core/date/UI5Date"
@@ -22,6 +23,7 @@ sap.ui.define(
       FilterType,
       Dialog,
       MessageBox,
+      MessageToast,
       Button,
       Text,
       UI5Date
@@ -36,7 +38,8 @@ sap.ui.define(
           selectedGenre: "",
           hasSelection: false,
           genres: [],
-          booksLoaded: false
+          booksLoaded: false,
+          hasProductsV2Selection: false
         });
 
         view.setModel(viewModel, "view");
@@ -389,6 +392,34 @@ sap.ui.define(
         viewModel.setProperty("/selectedGenre", "");
 
         this.onFilter();
+      },
+
+      onProductsV2SelectionChange() {
+        const table = this.byId("productsV2Table");
+        const viewModel = this.getModel("view");
+        const hasSelection = table.getSelectedContexts().length > 0;
+
+        viewModel.setProperty("/hasProductsV2Selection", hasSelection);
+      },
+
+      async onDeleteProductsV2() {
+        const table = this.byId("productsV2Table");
+        const demoV2Model = this.getModel("demoV2");
+        const resourceBundle = this.getResourceBundle();
+
+        const deletions = table
+          .getSelectedContexts()
+          .map((context) => context.delete());
+
+        table.removeSelections(true, true);
+        demoV2Model.submitChanges();
+
+        try {
+          await Promise.all(deletions);
+          MessageToast.show(resourceBundle.getText("deleteProductsSuccess"));
+        } catch {
+          MessageBox.error(resourceBundle.getText("deleteProductsError"));
+        }
       }
     });
   }
