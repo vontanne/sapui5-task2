@@ -420,6 +420,7 @@ sap.ui.define(
         table.removeSelections(true, true);
 
         demoV2Model.submitChanges({
+          groupId: "changes",
           success: () => {
             if (hasErrors) {
               MessageBox.error(resourceBundle.getText("deleteProductsError"));
