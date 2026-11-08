@@ -1,0 +1,122 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+
+    <Dialog
+        id="addProductV2Dialog"
+        core:require="{
+            StringType: 'sap/ui/model/odata/type/String',
+            DateTimeType: 'sap/ui/model/odata/type/DateTime',
+            Int32Type: 'sap/ui/model/odata/type/Int32',
+            DecimalType: 'sap/ui/model/odata/type/Decimal'
+        }"
+        title="{i18n>addProductTitle}"
+        contentWidth="40rem"
+        busyIndicatorDelay="0"
+        afterClose=".onAddProductV2DialogAfterClose">
+
+        <content>
+            <form:SimpleForm
+                id="addProductV2Form"
+                editable="true"
+                layout="ColumnLayout">
+
+                <Label
+                    id="newProductV2NameLabel"
+                    text="{i18n>productName}"
+                    required="true" />
+                <Input
+                    id="newProductV2NameInput"
+                    value="{
+                        path: 'view>/newProductV2/Name',
+                        type: 'StringType'
+                    }"
+                    change=".onFieldChange" />
+
+                <Label
+                    id="newProductV2DescriptionLabel"
+                    text="{i18n>productDescription}"
+                    required="true" />
+                <Input
+                    id="newProductV2DescriptionInput"
+                    value="{
+                        path: 'view>/newProductV2/Description',
+                        type: 'StringType'
+                    }"
+                    change=".onFieldChange" />
+
+                <Label
+                    id="newProductV2ReleaseDateLabel"
+                    text="{i18n>productReleaseDate}"
+                    required="true" />
+                <DatePicker
+                    id="newProductV2ReleaseDatePicker"
+                    value="{
+                        path: 'view>/newProductV2/ReleaseDate',
+                        type: 'DateTimeType',
+                        constraints: {
+                            displayFormat: 'Date'
+                        }
+                    }"
+                    maxDate="{view>/maxReleaseDate}"
+                    change=".onFieldChange" />
+
+                <Label
+                    id="newProductV2DiscontinuedDateLabel"
+                    text="{i18n>productDiscontinuedDate}" />
+                <DatePicker
+                    id="newProductV2DiscontinuedDatePicker"
+                    value="{
+                        path: 'view>/newProductV2/DiscontinuedDate',
+                        type: 'DateTimeType',
+                        constraints: {
+                            displayFormat: 'Date'
+                        }
+                    }" />
+
+                <Label
+                    id="newProductV2RatingLabel"
+                    text="{i18n>productRating}"
+                    required="true" />
+                <Input
+                    id="newProductV2RatingInput"
+                    value="{
+                        path: 'view>/newProductV2/Rating',
+                        type: 'Int32Type'
+                    }"
+                    change=".onFieldChange" />
+
+                <Label
+                    id="newProductV2PriceLabel"
+                    text="{i18n>productPrice}"
+                    required="true" />
+                <Input
+                    id="newProductV2PriceInput"
+                    value="{
+                        path: 'view>/newProductV2/Price',
+                        type: 'DecimalType',
+                        constraints: {
+                            scale: 'variable'
+                        }
+                    }"
+                    change=".onFieldChange" />
+            </form:SimpleForm>
+        </content>
+
+        <beginButton>
+            <Button
+                id="saveProductV2Button"
+                text="{i18n>save}"
+                type="Emphasized"
+                press=".onSaveProductV2" />
+        </beginButton>
+
+        <endButton>
+            <Button
+                id="cancelAddProductV2Button"
+                text="{i18n>addProductCancel}"
+                press=".onCancelAddProductV2" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
