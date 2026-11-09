@@ -437,25 +437,42 @@ sap.ui.define(
       },
 
       async onAddProductV2() {
-        const viewModel = this.getModel("view");
-
-        viewModel.setProperty("/newProductV2", {
-          Name: "",
-          Description: "",
-          ReleaseDate: null,
-          DiscontinuedDate: null,
-          Rating: null,
-          Price: null
-        });
-        viewModel.setProperty("/maxReleaseDate", UI5Date.getInstance());
-
-        if (!this._addProductV2DialogLoading) {
-          this._addProductV2DialogLoading = this.loadFragment({
-            name: "ui5learning.view.AddProductV2Dialog"
-          });
+        if (this._addProductV2DialogLoading) {
+          return;
         }
 
+        const viewModel = this.getModel("view");
+        const demoV2Model = this.getModel("demoV2");
+        const resourceBundle = this.getResourceBundle();
+
+        viewModel.setProperty("/maxReleaseDate", UI5Date.getInstance());
+
+        const context = demoV2Model.createEntry("/Products", {
+          groupId: "changes",
+          properties: {
+            Name: "",
+            Description: "",
+            ReleaseDate: null,
+            DiscontinuedDate: null,
+            Rating: null,
+            Price: null
+          },
+          success: () => {
+            MessageToast.show(resourceBundle.getText("createProductSuccess"));
+            this._addProductV2Dialog.close();
+          },
+          error: () => {
+            this._addProductV2Dialog.setBusy(false);
+            MessageBox.error(resourceBundle.getText("createProductError"));
+          }
+        });
+
+        this._addProductV2DialogLoading = this.loadFragment({
+          name: "ui5learning.view.AddProductV2Dialog"
+        });
+
         this._addProductV2Dialog = await this._addProductV2DialogLoading;
+        this._addProductV2Dialog.setBindingContext(context, "demoV2");
         this._addProductV2Dialog.open();
       },
 
@@ -476,32 +493,8 @@ sap.ui.define(
           return;
         }
 
-        const viewModel = this.getModel("view");
-        const demoV2Model = this.getModel("demoV2");
-        const resourceBundle = this.getResourceBundle();
-        const draft = viewModel.getProperty("/newProductV2");
-
-        const newProduct = {
-          Name: draft.Name.trim(),
-          Description: draft.Description.trim(),
-          ReleaseDate: draft.ReleaseDate,
-          DiscontinuedDate: draft.DiscontinuedDate,
-          Rating: draft.Rating,
-          Price: draft.Price
-        };
-
         this._addProductV2Dialog.setBusy(true);
-
-        demoV2Model.create("/Products", newProduct, {
-          success: () => {
-            MessageToast.show(resourceBundle.getText("createProductSuccess"));
-            this._addProductV2Dialog.close();
-          },
-          error: () => {
-            this._addProductV2Dialog.setBusy(false);
-            MessageBox.error(resourceBundle.getText("createProductError"));
-          }
-        });
+        this.getModel("demoV2").submitChanges({ groupId: "changes" });
       },
 
       onCancelAddProductV2() {
@@ -509,6 +502,12 @@ sap.ui.define(
       },
 
       onAddProductV2DialogAfterClose() {
+        const context = this._addProductV2Dialog.getBindingContext("demoV2");
+
+        if (context.isTransient()) {
+          context.delete();
+        }
+
         this._addProductV2Dialog.destroy();
         this._addProductV2Dialog = null;
         this._addProductV2DialogLoading = null;

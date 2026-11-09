@@ -29,7 +29,7 @@
                 <Input
                     id="newProductV2NameInput"
                     value="{
-                        path: 'view>/newProductV2/Name',
+                        path: 'demoV2>Name',
                         type: 'StringType'
                     }"
                     change=".onFieldChange" />
@@ -41,7 +41,7 @@
                 <Input
                     id="newProductV2DescriptionInput"
                     value="{
-                        path: 'view>/newProductV2/Description',
+                        path: 'demoV2>Description',
                         type: 'StringType'
                     }"
                     change=".onFieldChange" />
@@ -53,7 +53,7 @@
                 <DatePicker
                     id="newProductV2ReleaseDatePicker"
                     value="{
-                        path: 'view>/newProductV2/ReleaseDate',
+                        path: 'demoV2>ReleaseDate',
                         type: 'DateTimeType',
                         constraints: {
                             displayFormat: 'Date'
@@ -68,7 +68,7 @@
                 <DatePicker
                     id="newProductV2DiscontinuedDatePicker"
                     value="{
-                        path: 'view>/newProductV2/DiscontinuedDate',
+                        path: 'demoV2>DiscontinuedDate',
                         type: 'DateTimeType',
                         constraints: {
                             displayFormat: 'Date'
@@ -82,7 +82,7 @@
                 <Input
                     id="newProductV2RatingInput"
                     value="{
-                        path: 'view>/newProductV2/Rating',
+                        path: 'demoV2>Rating',
                         type: 'Int32Type'
                     }"
                     change=".onFieldChange" />
@@ -94,7 +94,7 @@
                 <Input
                     id="newProductV2PriceInput"
                     value="{
-                        path: 'view>/newProductV2/Price',
+                        path: 'demoV2>Price',
                         type: 'DecimalType',
                         constraints: {
                             scale: 'variable'
