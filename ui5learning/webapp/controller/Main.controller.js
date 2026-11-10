@@ -434,6 +434,83 @@ sap.ui.define(
             MessageBox.error(resourceBundle.getText("deleteProductsError"));
           }
         });
+      },
+
+      async onAddProductV2() {
+        if (this._addProductV2DialogLoading) {
+          return;
+        }
+
+        const viewModel = this.getModel("view");
+        const demoV2Model = this.getModel("demoV2");
+        const resourceBundle = this.getResourceBundle();
+
+        viewModel.setProperty("/maxReleaseDate", UI5Date.getInstance());
+
+        const context = demoV2Model.createEntry("/Products", {
+          groupId: "changes",
+          properties: {
+            Name: "",
+            Description: "",
+            ReleaseDate: null,
+            DiscontinuedDate: null,
+            Rating: null,
+            Price: null
+          },
+          success: () => {
+            MessageToast.show(resourceBundle.getText("createProductSuccess"));
+            this._addProductV2Dialog.close();
+          },
+          error: () => {
+            this._addProductV2Dialog.setBusy(false);
+            MessageBox.error(resourceBundle.getText("createProductError"));
+          }
+        });
+
+        this._addProductV2DialogLoading = this.loadFragment({
+          name: "ui5learning.view.AddProductV2Dialog"
+        });
+
+        this._addProductV2Dialog = await this._addProductV2DialogLoading;
+        this._addProductV2Dialog.setBindingContext(context, "demoV2");
+        this._addProductV2Dialog.open();
+      },
+
+      onSaveProductV2() {
+        const fields = [
+          "newProductV2NameInput",
+          "newProductV2DescriptionInput",
+          "newProductV2ReleaseDatePicker",
+          "newProductV2RatingInput",
+          "newProductV2PriceInput"
+        ].map((id) => this.byId(id));
+
+        const invalidFields = fields.filter(
+          (field) => !this._validateField(field)
+        );
+
+        if (invalidFields.length > 0) {
+          return;
+        }
+
+        this._addProductV2Dialog.setBusy(true);
+        this.getModel("demoV2").submitChanges({ groupId: "changes" });
+      },
+
+      onCancelAddProductV2() {
+        this._addProductV2Dialog.close();
+      },
+
+      onAddProductV2DialogAfterClose() {
+        const context = this._addProductV2Dialog.getBindingContext("demoV2");
+
+        if (context.isTransient()) {
+          context.delete();
+        }
+
+        this._addProductV2Dialog.destroy();
+        this._addProductV2Dialog = null;
+        this._addProductV2DialogLoading = null;
       }
     });
   }

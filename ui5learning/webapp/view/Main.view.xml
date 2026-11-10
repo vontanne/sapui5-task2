@@ -177,6 +177,10 @@
                                     <Toolbar id="productsV2Toolbar">
                                         <content>
                                             <Button
+                                                id="addProductV2Button"
+                                                text="{i18n>addRecord}"
+                                                press=".onAddProductV2" />
+                                            <Button
                                                 id="deleteProductsV2Button"
                                                 text="{i18n>deleteProducts}"
                                                 enabled="{view>/hasProductsV2Selection}"

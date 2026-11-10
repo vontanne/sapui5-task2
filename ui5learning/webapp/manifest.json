@@ -84,7 +84,10 @@
       },
       "demoV2": {
         "dataSource": "demoServiceV2",
-        "preload": true
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay"
+        }
       },
       "demoV4": {
         "dataSource": "demoServiceV4",
