@@ -4,30 +4,30 @@
     xmlns:form="sap.ui.layout.form">
 
     <Dialog
-        id="addProductV2Dialog"
+        id="productV2Dialog"
         core:require="{
             StringType: 'sap/ui/model/odata/type/String',
             DateTimeType: 'sap/ui/model/odata/type/DateTime',
             Int32Type: 'sap/ui/model/odata/type/Int32',
             DecimalType: 'sap/ui/model/odata/type/Decimal'
         }"
-        title="{i18n>addProductTitle}"
+        title="{= ${view>/productV2EditMode} ? ${i18n>editProductTitle} : ${i18n>addProductTitle} }"
         contentWidth="40rem"
         busyIndicatorDelay="0"
-        afterClose=".onAddProductV2DialogAfterClose">
+        afterClose=".onProductV2DialogAfterClose">
 
         <content>
             <form:SimpleForm
-                id="addProductV2Form"
+                id="productV2Form"
                 editable="true"
                 layout="ColumnLayout">
 
                 <Label
-                    id="newProductV2NameLabel"
+                    id="productV2NameLabel"
                     text="{i18n>productName}"
                     required="true" />
                 <Input
-                    id="newProductV2NameInput"
+                    id="productV2NameInput"
                     value="{
                         path: 'demoV2>Name',
                         type: 'StringType'
@@ -35,11 +35,11 @@
                     change=".onFieldChange" />
 
                 <Label
-                    id="newProductV2DescriptionLabel"
+                    id="productV2DescriptionLabel"
                     text="{i18n>productDescription}"
                     required="true" />
                 <Input
-                    id="newProductV2DescriptionInput"
+                    id="productV2DescriptionInput"
                     value="{
                         path: 'demoV2>Description',
                         type: 'StringType'
@@ -47,11 +47,11 @@
                     change=".onFieldChange" />
 
                 <Label
-                    id="newProductV2ReleaseDateLabel"
+                    id="productV2ReleaseDateLabel"
                     text="{i18n>productReleaseDate}"
                     required="true" />
                 <DatePicker
-                    id="newProductV2ReleaseDatePicker"
+                    id="productV2ReleaseDatePicker"
                     value="{
                         path: 'demoV2>ReleaseDate',
                         type: 'DateTimeType',
@@ -63,10 +63,10 @@
                     change=".onFieldChange" />
 
                 <Label
-                    id="newProductV2DiscontinuedDateLabel"
+                    id="productV2DiscontinuedDateLabel"
                     text="{i18n>productDiscontinuedDate}" />
                 <DatePicker
-                    id="newProductV2DiscontinuedDatePicker"
+                    id="productV2DiscontinuedDatePicker"
                     value="{
                         path: 'demoV2>DiscontinuedDate',
                         type: 'DateTimeType',
@@ -76,11 +76,11 @@
                     }" />
 
                 <Label
-                    id="newProductV2RatingLabel"
+                    id="productV2RatingLabel"
                     text="{i18n>productRating}"
                     required="true" />
                 <Input
-                    id="newProductV2RatingInput"
+                    id="productV2RatingInput"
                     value="{
                         path: 'demoV2>Rating',
                         type: 'Int32Type'
@@ -88,11 +88,11 @@
                     change=".onFieldChange" />
 
                 <Label
-                    id="newProductV2PriceLabel"
+                    id="productV2PriceLabel"
                     text="{i18n>productPrice}"
                     required="true" />
                 <Input
-                    id="newProductV2PriceInput"
+                    id="productV2PriceInput"
                     value="{
                         path: 'demoV2>Price',
                         type: 'DecimalType',
@@ -114,9 +114,9 @@
 
         <endButton>
             <Button
-                id="cancelAddProductV2Button"
-                text="{i18n>addProductCancel}"
-                press=".onCancelAddProductV2" />
+                id="cancelProductV2Button"
+                text="{i18n>cancel}"
+                press=".onCancelProductV2" />
         </endButton>
     </Dialog>
 </core:FragmentDefinition>

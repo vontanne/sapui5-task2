@@ -437,7 +437,7 @@ sap.ui.define(
       },
 
       async onAddProductV2() {
-        if (this._addProductV2DialogLoading) {
+        if (this._productV2DialogLoading) {
           return;
         }
 
@@ -445,7 +445,7 @@ sap.ui.define(
         const demoV2Model = this.getModel("demoV2");
         const resourceBundle = this.getResourceBundle();
 
-        viewModel.setProperty("/maxReleaseDate", UI5Date.getInstance());
+        viewModel.setProperty("/productV2EditMode", false);
 
         const context = demoV2Model.createEntry("/Products", {
           groupId: "changes",
@@ -457,32 +457,53 @@ sap.ui.define(
             Rating: null,
             Price: null
           },
+
           success: () => {
             MessageToast.show(resourceBundle.getText("createProductSuccess"));
-            this._addProductV2Dialog.close();
+            this._productV2Dialog.close();
           },
           error: () => {
-            this._addProductV2Dialog.setBusy(false);
+            this._productV2Dialog.setBusy(false);
             MessageBox.error(resourceBundle.getText("createProductError"));
           }
         });
 
-        this._addProductV2DialogLoading = this.loadFragment({
-          name: "ui5learning.view.AddProductV2Dialog"
+        await this._openProductV2Dialog(context);
+      },
+
+      async onEditProductV2(event) {
+        if (this._productV2DialogLoading) {
+          return;
+        }
+
+        const viewModel = this.getModel("view");
+        const context = event.getSource().getBindingContext("demoV2");
+
+        viewModel.setProperty("/productV2EditMode", true);
+        await this._openProductV2Dialog(context);
+      },
+
+      async _openProductV2Dialog(context) {
+        const viewModel = this.getModel("view");
+
+        viewModel.setProperty("/maxReleaseDate", UI5Date.getInstance());
+
+        this._productV2DialogLoading = this.loadFragment({
+          name: "ui5learning.view.ProductV2Dialog"
         });
 
-        this._addProductV2Dialog = await this._addProductV2DialogLoading;
-        this._addProductV2Dialog.setBindingContext(context, "demoV2");
-        this._addProductV2Dialog.open();
+        this._productV2Dialog = await this._productV2DialogLoading;
+        this._productV2Dialog.setBindingContext(context, "demoV2");
+        this._productV2Dialog.open();
       },
 
       onSaveProductV2() {
         const fields = [
-          "newProductV2NameInput",
-          "newProductV2DescriptionInput",
-          "newProductV2ReleaseDatePicker",
-          "newProductV2RatingInput",
-          "newProductV2PriceInput"
+          "productV2NameInput",
+          "productV2DescriptionInput",
+          "productV2ReleaseDatePicker",
+          "productV2RatingInput",
+          "productV2PriceInput"
         ].map((id) => this.byId(id));
 
         const invalidFields = fields.filter(
@@ -493,24 +514,52 @@ sap.ui.define(
           return;
         }
 
-        this._addProductV2Dialog.setBusy(true);
-        this.getModel("demoV2").submitChanges({ groupId: "changes" });
-      },
+        const viewModel = this.getModel("view");
+        const demoV2Model = this.getModel("demoV2");
 
-      onCancelAddProductV2() {
-        this._addProductV2Dialog.close();
-      },
+        this._productV2Dialog.setBusy(true);
 
-      onAddProductV2DialogAfterClose() {
-        const context = this._addProductV2Dialog.getBindingContext("demoV2");
-
-        if (context.isTransient()) {
-          context.delete();
+        if (!viewModel.getProperty("/productV2EditMode")) {
+          demoV2Model.submitChanges({ groupId: "changes" });
+          return;
         }
 
-        this._addProductV2Dialog.destroy();
-        this._addProductV2Dialog = null;
-        this._addProductV2DialogLoading = null;
+        const resourceBundle = this.getResourceBundle();
+        const showUpdateError = () => {
+          this._productV2Dialog.setBusy(false);
+          MessageBox.error(resourceBundle.getText("updateProductError"));
+        };
+
+        demoV2Model.submitChanges({
+          groupId: "changes",
+          success: (data) => {
+            const batchResponses = data.__batchResponses || [];
+
+            if (batchResponses.some((response) => response.message)) {
+              showUpdateError();
+              return;
+            }
+
+            MessageToast.show(resourceBundle.getText("updateProductSuccess"));
+            this._productV2Dialog.close();
+          },
+          error: showUpdateError
+        });
+      },
+
+      onCancelProductV2() {
+        this._productV2Dialog.close();
+      },
+
+      onProductV2DialogAfterClose() {
+        const demoV2Model = this.getModel("demoV2");
+        const context = this._productV2Dialog.getBindingContext("demoV2");
+
+        demoV2Model.resetChanges([context.getPath()], false, true);
+
+        this._productV2Dialog.destroy();
+        this._productV2Dialog = null;
+        this._productV2DialogLoading = null;
       }
     });
   }
