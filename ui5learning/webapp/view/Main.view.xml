@@ -223,6 +223,10 @@
                                     <Column id="productV2PriceColumn">
                                         <Text id="productV2PriceHeader" text="{i18n>productPrice}" />
                                     </Column>
+
+                                    <Column id="productV2ActionsColumn" width="6rem">
+                                        <Text id="productV2ActionsHeader" text="{i18n>actions}" />
+                                    </Column>
                                 </columns>
 
                                 <items>
@@ -247,6 +251,10 @@
                                                 }" />
                                             <Text id="productV2RatingCell" text="{demoV2>Rating}" />
                                             <Text id="productV2PriceCell" text="{demoV2>Price}" />
+                                            <Button
+                                                id="editProductV2Button"
+                                                text="{i18n>editProduct}"
+                                                press=".onEditProductV2" />
                                         </cells>
                                     </ColumnListItem>
                                 </items>
