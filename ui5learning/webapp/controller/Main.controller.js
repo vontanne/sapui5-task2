@@ -560,6 +560,26 @@ sap.ui.define(
         this._productV2Dialog.destroy();
         this._productV2Dialog = null;
         this._productV2DialogLoading = null;
+      },
+
+      onProductV2NameFilter(event) {
+        const table = this.byId("productsV2Table");
+        const name = event.getParameter("value").trim();
+        const filters = [];
+
+        if (name) {
+          filters.push(
+            new Filter({
+              path: "Name",
+              operator: FilterOperator.Contains,
+              value1: name,
+              caseSensitive: false
+            })
+          );
+        }
+
+        table.removeSelections(true, true);
+        table.getBinding("items").filter(filters, FilterType.Application);
       }
     });
   }

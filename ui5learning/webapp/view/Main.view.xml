@@ -185,6 +185,11 @@
                                                 text="{i18n>deleteProducts}"
                                                 enabled="{view>/hasProductsV2Selection}"
                                                 press=".onDeleteProductsV2" />
+                                            <Input
+                                                id="productV2NameFilterInput"
+                                                width="14rem"
+                                                placeholder="{i18n>productNameFilterPlaceholder}"
+                                                liveChange=".onProductV2NameFilter" />
                                         </content>
                                     </Toolbar>
                                 </headerToolbar>
