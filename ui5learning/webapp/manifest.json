@@ -119,8 +119,15 @@
       },
       "routes": [
         {
+          "name": "RouteTab",
+          "pattern": "tab/{tabKey}",
+          "target": [
+            "TargetMain"
+          ]
+        },
+        {
           "name": "RouteMain",
-          "pattern": ":?query:",
+          "pattern": ":path*:",
           "target": [
             "TargetMain"
           ]

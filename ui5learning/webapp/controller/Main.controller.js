@@ -31,6 +31,8 @@ sap.ui.define(
       UI5Date
     ] = modules;
 
+    const validTabKeys = ["json", "odataV2", "odataV4"];
+
     return BaseController.extend("ui5learning.controller.Main", {
       onInit() {
         const view = this.getView();
@@ -41,7 +43,8 @@ sap.ui.define(
           hasSelection: false,
           genres: [],
           booksLoaded: false,
-          hasProductsV2Selection: false
+          hasProductsV2Selection: false,
+          selectedTabKey: ""
         });
 
         view.setModel(viewModel, "view");
@@ -64,6 +67,13 @@ sap.ui.define(
           this._updateGenres();
           viewModel.setProperty("/booksLoaded", true);
         });
+
+        const router = this.getOwnerComponent().getRouter();
+        const mainRoute = router.getRoute("RouteMain");
+        const tabRoute = router.getRoute("RouteTab");
+
+        mainRoute.attachPatternMatched(this._onRouteMatched, this);
+        tabRoute.attachPatternMatched(this._onRouteMatched, this);
       },
 
       onFilter() {
@@ -594,6 +604,26 @@ sap.ui.define(
         }
 
         table.getBinding("items").sort(sorters);
+      },
+
+      onTabSelect(event) {
+        const router = this.getOwnerComponent().getRouter();
+        const tabKey = event.getParameter("key");
+
+        router.navTo("RouteTab", { tabKey }, true);
+      },
+
+      _onRouteMatched(event) {
+        const router = this.getOwnerComponent().getRouter();
+        const viewModel = this.getModel("view");
+        const tabKey = event.getParameter("arguments").tabKey;
+
+        if (!validTabKeys.includes(tabKey)) {
+          router.navTo("RouteTab", { tabKey: validTabKeys[0] }, true);
+          return;
+        }
+
+        viewModel.setProperty("/selectedTabKey", tabKey);
       }
     });
   }

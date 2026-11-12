@@ -7,10 +7,14 @@
 
     <Page id="page" title="{i18n>title}">
         <content>
-            <IconTabBar id="modelTabBar">
+            <IconTabBar
+                id="modelTabBar"
+                select=".onTabSelect"
+                selectedKey="{view>/selectedTabKey}">
                 <items>
                     <IconTabFilter
                         id="jsonModelTab"
+                        key="json"
                         text="{i18n>jsonModelTab}">
                         <content>
                             <Table
@@ -163,6 +167,7 @@
                     </IconTabFilter>
                     <IconTabFilter
                         id="odataV2ModelTab"
+                        key="odataV2"
                         text="{i18n>odataV2ModelTab}">
                         <content>
                             <Table
@@ -302,6 +307,7 @@
                     </IconTabFilter>
                     <IconTabFilter
                         id="odataV4ModelTab"
+                        key="odataV4"
                         text="{i18n>odataV4ModelTab}">
                         <content>
                             <Table
