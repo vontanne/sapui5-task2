@@ -7,6 +7,7 @@ sap.ui.define(
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/ui/model/FilterType",
+    "sap/ui/model/Sorter",
     "sap/m/Dialog",
     "sap/m/MessageBox",
     "sap/m/MessageToast",
@@ -21,6 +22,7 @@ sap.ui.define(
       Filter,
       FilterOperator,
       FilterType,
+      Sorter,
       Dialog,
       MessageBox,
       MessageToast,
@@ -580,6 +582,18 @@ sap.ui.define(
 
         table.removeSelections(true, true);
         table.getBinding("items").filter(filters, FilterType.Application);
+      },
+
+      onProductV2Sort(event) {
+        const table = this.byId("productsV2Table");
+        const column = event.getParameter("selectedItem");
+        const sorters = [];
+
+        if (column) {
+          sorters.push(new Sorter({ path: column.getKey(), descending: true }));
+        }
+
+        table.getBinding("items").sort(sorters);
       }
     });
   }

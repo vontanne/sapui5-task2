@@ -190,6 +190,40 @@
                                                 width="14rem"
                                                 placeholder="{i18n>productNameFilterPlaceholder}"
                                                 liveChange=".onProductV2NameFilter" />
+                                            <ComboBox
+                                                id="productV2SortComboBox"
+                                                width="14rem"
+                                                placeholder="{i18n>productSortPlaceholder}"
+                                                selectionChange=".onProductV2Sort">
+                                                <core:Item
+                                                    id="productV2SortIdItem"
+                                                    key="ID"
+                                                    text="{i18n>productId}" />
+                                                <core:Item
+                                                    id="productV2SortNameItem"
+                                                    key="Name"
+                                                    text="{i18n>productName}" />
+                                                <core:Item
+                                                    id="productV2SortDescriptionItem"
+                                                    key="Description"
+                                                    text="{i18n>productDescription}" />
+                                                <core:Item
+                                                    id="productV2SortReleaseDateItem"
+                                                    key="ReleaseDate"
+                                                    text="{i18n>productReleaseDate}" />
+                                                <core:Item
+                                                    id="productV2SortDiscontinuedDateItem"
+                                                    key="DiscontinuedDate"
+                                                    text="{i18n>productDiscontinuedDate}" />
+                                                <core:Item
+                                                    id="productV2SortRatingItem"
+                                                    key="Rating"
+                                                    text="{i18n>productRating}" />
+                                                <core:Item
+                                                    id="productV2SortPriceItem"
+                                                    key="Price"
+                                                    text="{i18n>productPrice}" />
+                                            </ComboBox>
                                         </content>
                                     </Toolbar>
                                 </headerToolbar>
