@@ -624,6 +624,13 @@ sap.ui.define(
         }
 
         viewModel.setProperty("/selectedTabKey", tabKey);
+      },
+
+      onProductV2Press(event) {
+        const router = this.getOwnerComponent().getRouter();
+        const context = event.getSource().getBindingContext("demoV2");
+
+        router.navTo("RouteProduct", { productId: context.getProperty("ID") });
       }
     });
   }
