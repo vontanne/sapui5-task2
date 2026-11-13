@@ -1,0 +1,9 @@
+<mvc:View
+    controllerName="ui5learning.controller.Product"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page
+        id="productPage"
+        title="{i18n>productPageTitle}" />
+</mvc:View>

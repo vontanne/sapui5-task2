@@ -274,7 +274,10 @@
                                 </columns>
 
                                 <items>
-                                    <ColumnListItem id="productV2Row">
+                                    <ColumnListItem
+                                        id="productV2Row"
+                                        type="Active"
+                                        press=".onProductV2Press">
                                         <cells>
                                             <Text id="productV2IdCell" text="{demoV2>ID}" />
                                             <Text id="productV2NameCell" text="{demoV2>Name}" />
