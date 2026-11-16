@@ -6,7 +6,8 @@
     "ReleaseDate": "/Date(694224000000)/",
     "DiscontinuedDate": "",
     "Rating": 4,
-    "Price": "2.5"
+    "Price": "2.5",
+    "SupplierID": 1
   },
   {
     "ID": 1,
@@ -15,7 +16,8 @@
     "ReleaseDate": "/Date(812505600000)/",
     "DiscontinuedDate": "",
     "Rating": 3,
-    "Price": "3.5"
+    "Price": "3.5",
+    "SupplierID": 0
   },
   {
     "ID": 2,
@@ -24,7 +26,8 @@
     "ReleaseDate": "/Date(970358400000)/",
     "DiscontinuedDate": "",
     "Rating": 3,
-    "Price": "20.9"
+    "Price": "20.9",
+    "SupplierID": 0
   },
   {
     "ID": 3,
@@ -33,7 +36,8 @@
     "ReleaseDate": "/Date(1128124800000)/",
     "DiscontinuedDate": "/Date(1159660800000)/",
     "Rating": 3,
-    "Price": "19.9"
+    "Price": "19.9",
+    "SupplierID": 0
   },
   {
     "ID": 4,
@@ -42,7 +46,8 @@
     "ReleaseDate": "/Date(1041724800000)/",
     "DiscontinuedDate": "",
     "Rating": 3,
-    "Price": "22.99"
+    "Price": "22.99",
+    "SupplierID": 0
   },
   {
     "ID": 5,
@@ -51,7 +56,8 @@
     "ReleaseDate": "/Date(1154649600000)/",
     "DiscontinuedDate": "",
     "Rating": 3,
-    "Price": "22.8"
+    "Price": "22.8",
+    "SupplierID": 0
   },
   {
     "ID": 6,
@@ -60,7 +66,8 @@
     "ReleaseDate": "/Date(1162684800000)/",
     "DiscontinuedDate": "",
     "Rating": 3,
-    "Price": "18.8"
+    "Price": "18.8",
+    "SupplierID": 0
   },
   {
     "ID": 7,
@@ -69,7 +76,8 @@
     "ReleaseDate": "/Date(1163548800000)/",
     "DiscontinuedDate": "",
     "Rating": 3,
-    "Price": "35.88"
+    "Price": "35.88",
+    "SupplierID": 1
   },
   {
     "ID": 8,
@@ -78,6 +86,7 @@
     "ReleaseDate": "/Date(1210204800000)/",
     "DiscontinuedDate": "",
     "Rating": 3,
-    "Price": "1088.8"
+    "Price": "1088.8",
+    "SupplierID": 1
   }
 ]

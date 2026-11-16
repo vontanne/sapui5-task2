@@ -1,9 +1,165 @@
 <mvc:View
     controllerName="ui5learning.controller.Product"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
+    xmlns:core="sap.ui.core"
+    xmlns="sap.uxap"
+    xmlns:m="sap.m"
+    xmlns:form="sap.ui.layout.form">
 
-    <Page
-        id="productPage"
-        title="{i18n>productPageTitle}" />
+    <ObjectPageLayout
+        id="productObjectPageLayout"
+        upperCaseAnchorBar="false">
+        <headerTitle>
+            <ObjectPageHeader
+                id="productObjectPageHeader"
+                objectTitle="{demoV2>Name}" />
+        </headerTitle>
+
+        <sections>
+            <ObjectPageSection
+                id="productInformationSection"
+                titleUppercase="false"
+                title="{i18n>productInformationSection}">
+                <subSections>
+                    <ObjectPageSubSection id="productInformationSubSection">
+                        <blocks>
+                            <form:SimpleForm
+                                id="productInformationForm"
+                                core:require="{ DateTimeType: 'sap/ui/model/odata/type/DateTime' }"
+                                editable="false"
+                                layout="ColumnLayout">
+
+                                <m:Label
+                                    id="productIdLabel"
+                                    text="{i18n>productId}" />
+                                <m:Text
+                                    id="productIdText"
+                                    text="{demoV2>ID}" />
+
+                                <m:Label
+                                    id="productNameLabel"
+                                    text="{i18n>productName}" />
+                                <m:Text
+                                    id="productNameText"
+                                    text="{demoV2>Name}" />
+
+                                <m:Label
+                                    id="productDescriptionLabel"
+                                    text="{i18n>productDescription}" />
+                                <m:Text
+                                    id="productDescriptionText"
+                                    text="{demoV2>Description}" />
+
+                                <m:Label
+                                    id="productReleaseDateLabel"
+                                    text="{i18n>productReleaseDate}" />
+                                <m:Text
+                                    id="productReleaseDateText"
+                                    text="{
+                                        path: 'demoV2>ReleaseDate',
+                                        type: 'DateTimeType',
+                                        constraints: {
+                                            displayFormat: 'Date'
+                                        }
+                                    }" />
+
+                                <m:Label
+                                    id="productDiscontinuedDateLabel"
+                                    text="{i18n>productDiscontinuedDate}" />
+                                <m:Text
+                                    id="productDiscontinuedDateText"
+                                    text="{
+                                        path: 'demoV2>DiscontinuedDate',
+                                        type: 'DateTimeType',
+                                        constraints: {
+                                            displayFormat: 'Date'
+                                        }
+                                    }" />
+
+                                <m:Label
+                                    id="productRatingLabel"
+                                    text="{i18n>productRating}" />
+                                <m:Text
+                                    id="productRatingText"
+                                    text="{demoV2>Rating}" />
+
+                                <m:Label
+                                    id="productPriceLabel"
+                                    text="{i18n>productPrice}" />
+                                <m:Text
+                                    id="productPriceText"
+                                    text="{demoV2>Price}" />
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection
+                id="supplierSection"
+                titleUppercase="false"
+                title="{i18n>supplierSection}">
+                <subSections>
+                    <ObjectPageSubSection id="supplierSubSection">
+                        <blocks>
+                            <form:SimpleForm
+                                id="supplierForm"
+                                editable="false"
+                                layout="ColumnLayout">
+
+                                <m:Label
+                                    id="supplierIdLabel"
+                                    text="{i18n>supplierId}" />
+                                <m:Text
+                                    id="supplierIdText"
+                                    text="{demoV2>Supplier/ID}" />
+
+                                <m:Label
+                                    id="supplierNameLabel"
+                                    text="{i18n>supplierName}" />
+                                <m:Text
+                                    id="supplierNameText"
+                                    text="{demoV2>Supplier/Name}" />
+
+                                <m:Label
+                                    id="supplierStreetLabel"
+                                    text="{i18n>supplierStreet}" />
+                                <m:Text
+                                    id="supplierStreetText"
+                                    text="{demoV2>Supplier/Address/Street}" />
+
+                                <m:Label
+                                    id="supplierCityLabel"
+                                    text="{i18n>supplierCity}" />
+                                <m:Text
+                                    id="supplierCityText"
+                                    text="{demoV2>Supplier/Address/City}" />
+
+                                <m:Label
+                                    id="supplierStateLabel"
+                                    text="{i18n>supplierState}" />
+                                <m:Text
+                                    id="supplierStateText"
+                                    text="{demoV2>Supplier/Address/State}" />
+
+                                <m:Label
+                                    id="supplierZipCodeLabel"
+                                    text="{i18n>supplierZipCode}" />
+                                <m:Text
+                                    id="supplierZipCodeText"
+                                    text="{demoV2>Supplier/Address/ZipCode}" />
+
+                                <m:Label
+                                    id="supplierCountryLabel"
+                                    text="{i18n>supplierCountry}" />
+                                <m:Text
+                                    id="supplierCountryText"
+                                    text="{demoV2>Supplier/Address/Country}" />
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
 </mvc:View>
