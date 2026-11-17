@@ -1,0 +1,26 @@
+[
+  {
+    "ID": 0,
+    "Name": "Exotic Liquids",
+    "Address": {
+      "Street": "Schillerstraße 12",
+      "City": "Munich",
+      "State": "Bavaria",
+      "ZipCode": "80336",
+      "Country": "Germany"
+    },
+    "Concurrency": 0
+  },
+  {
+    "ID": 1,
+    "Name": "Shenzhen Traders",
+    "Address": {
+      "Street": "Huaqiang North Road 1002",
+      "City": "Shenzhen",
+      "State": "Guangdong",
+      "ZipCode": "518000",
+      "Country": "China"
+    },
+    "Concurrency": 0
+  }
+]
