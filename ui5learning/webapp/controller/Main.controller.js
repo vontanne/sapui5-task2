@@ -44,6 +44,7 @@ sap.ui.define(
           genres: [],
           booksLoaded: false,
           hasProductsV2Selection: false,
+          hasProductsV4Selection: false,
           selectedTabKey: ""
         });
 
@@ -631,6 +632,41 @@ sap.ui.define(
         const context = event.getSource().getBindingContext("demoV2");
 
         router.navTo("RouteProduct", { productId: context.getProperty("ID") });
+      },
+
+      onProductsV4SelectionChange() {
+        const table = this.byId("productsV4Table");
+        const viewModel = this.getModel("view");
+        const hasSelection = table.getSelectedContexts().length > 0;
+
+        viewModel.setProperty("/hasProductsV4Selection", hasSelection);
+      },
+
+      async onDeleteProductsV4() {
+        const table = this.byId("productsV4Table");
+        const resourceBundle = this.getResourceBundle();
+        const selectedContexts = table.getSelectedContexts();
+        let hasErrors = false;
+
+        table.removeSelections(true, true);
+
+        const deletions = selectedContexts.map(async (context) => {
+          try {
+            await context.delete();
+          } catch {
+            hasErrors = true;
+          }
+        });
+
+        for (const deletion of deletions) {
+          await deletion;
+        }
+
+        if (hasErrors) {
+          MessageBox.error(resourceBundle.getText("deleteProductsError"));
+        } else {
+          MessageToast.show(resourceBundle.getText("deleteProductsSuccess"));
+        }
       }
     });
   }
