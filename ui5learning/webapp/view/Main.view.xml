@@ -315,8 +315,22 @@
                         <content>
                             <Table
                                 id="productsV4Table"
+                                mode="MultiSelect"
+                                selectionChange=".onProductsV4SelectionChange"
                                 items="{demoV4>/Products}"
                                 growing="true">
+
+                                <headerToolbar>
+                                    <Toolbar id="productsV4Toolbar">
+                                        <content>
+                                            <Button
+                                                id="deleteProductsV4Button"
+                                                text="{i18n>deleteProducts}"
+                                                enabled="{view>/hasProductsV4Selection}"
+                                                press=".onDeleteProductsV4" />
+                                        </content>
+                                    </Toolbar>
+                                </headerToolbar>
 
                                 <columns>
                                     <Column id="productV4IdColumn">
