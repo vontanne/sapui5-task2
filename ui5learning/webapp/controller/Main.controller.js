@@ -652,7 +652,7 @@ sap.ui.define(
 
         const deletions = selectedContexts.map(async (context) => {
           try {
-            await context.delete();
+            await context.delete("$auto");
           } catch {
             hasErrors = true;
           }
@@ -667,6 +667,109 @@ sap.ui.define(
         } else {
           MessageToast.show(resourceBundle.getText("deleteProductsSuccess"));
         }
+      },
+
+      async onAddProductV4() {
+        if (this._productV4DialogLoading) {
+          return;
+        }
+
+        const viewModel = this.getModel("view");
+        const listBinding = this.byId("productsV4Table").getBinding("items");
+
+        const context = listBinding.create(
+          { DiscontinuedDate: null },
+          true,
+          true
+        );
+
+        context.created().catch((error) => {
+          if (!error.canceled) {
+            throw error;
+          }
+        });
+
+        viewModel.setProperty("/maxReleaseDate", UI5Date.getInstance());
+
+        this._productV4DialogLoading = this.loadFragment({
+          name: "ui5learning.view.ProductV4Dialog"
+        });
+
+        this._productV4Dialog = await this._productV4DialogLoading;
+        this._productV4Dialog.setBindingContext(context, "demoV4");
+        this._productV4Dialog.open();
+      },
+
+      async onSaveProductV4() {
+        const fields = [
+          "productV4NameInput",
+          "productV4DescriptionInput",
+          "productV4ReleaseDatePicker",
+          "productV4RatingInput",
+          "productV4PriceInput"
+        ].map((id) => this.byId(id));
+
+        const discontinuedDatePicker = this.byId(
+          "productV4DiscontinuedDatePicker"
+        );
+
+        if (discontinuedDatePicker.getValue().trim()) {
+          fields.push(discontinuedDatePicker);
+        }
+
+        const invalidFields = fields.filter(
+          (field) => !this._validateField(field)
+        );
+
+        if (invalidFields.length > 0) {
+          return;
+        }
+
+        const demoV4Model = this.getModel("demoV4");
+        const resourceBundle = this.getResourceBundle();
+        let hasErrors = false;
+
+        this._productV4Dialog.setBusy(true);
+
+        try {
+          await demoV4Model.submitBatch("changes");
+        } catch {
+          hasErrors = true;
+        }
+
+        if (hasErrors || demoV4Model.hasPendingChanges("changes")) {
+          this._productV4Dialog.setBusy(false);
+          MessageBox.error(resourceBundle.getText("createProductError"));
+          return;
+        }
+
+        MessageToast.show(resourceBundle.getText("createProductSuccess"));
+        this._productV4Dialog.close();
+      },
+
+      onCancelProductV4() {
+        this._productV4Dialog.close();
+      },
+
+      onOptionalFieldChange(event) {
+        const field = event.getSource();
+
+        if (!field.getValue().trim()) {
+          field.setValueState("None");
+          return;
+        }
+
+        this._validateField(field);
+      },
+
+      onProductV4DialogAfterClose() {
+        const demoV4Model = this.getModel("demoV4");
+
+        demoV4Model.resetChanges("changes");
+
+        this._productV4Dialog.destroy();
+        this._productV4Dialog = null;
+        this._productV4DialogLoading = null;
       }
     });
   }
