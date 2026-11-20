@@ -1,0 +1,115 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+
+    <Dialog
+        id="productV4Dialog"
+        core:require="{
+            DateTimeOffsetType: 'sap/ui/model/odata/type/DateTimeOffset'
+        }"
+        title="{i18n>addProductTitle}"
+        contentWidth="40rem"
+        busyIndicatorDelay="0"
+        afterClose=".onProductV4DialogAfterClose">
+
+        <content>
+            <form:SimpleForm
+                id="productV4Form"
+                editable="true"
+                layout="ColumnLayout">
+
+                <Label
+                    id="productV4NameLabel"
+                    text="{i18n>productName}"
+                    required="true" />
+                <Input
+                    id="productV4NameInput"
+                    value="{demoV4>Name}"
+                    change=".onFieldChange" />
+
+                <Label
+                    id="productV4DescriptionLabel"
+                    text="{i18n>productDescription}"
+                    required="true" />
+                <Input
+                    id="productV4DescriptionInput"
+                    value="{demoV4>Description}"
+                    change=".onFieldChange" />
+
+                <Label
+                    id="productV4ReleaseDateLabel"
+                    text="{i18n>productReleaseDate}"
+                    required="true" />
+                <DatePicker
+                    id="productV4ReleaseDatePicker"
+                    value="{
+                        path: 'demoV4>ReleaseDate',
+                        type: 'DateTimeOffsetType',
+                        formatOptions: {
+                            UTC: true,
+                            format: 'yMMMd'
+                        },
+                        constraints: {
+                            V4: true,
+                            precision: 3
+                        }
+                    }"
+                    maxDate="{view>/maxReleaseDate}"
+                    change=".onFieldChange" />
+
+                <Label
+                    id="productV4DiscontinuedDateLabel"
+                    text="{i18n>productDiscontinuedDate}" />
+                <DatePicker
+                    id="productV4DiscontinuedDatePicker"
+                    value="{
+                        path: 'demoV4>DiscontinuedDate',
+                        type: 'DateTimeOffsetType',
+                        formatOptions: {
+                            UTC: true,
+                            format: 'yMMMd'
+                        },
+                        constraints: {
+                            V4: true,
+                            precision: 3
+                        }
+                    }"
+                    change=".onOptionalFieldChange" />
+
+                <Label
+                    id="productV4RatingLabel"
+                    text="{i18n>productRating}"
+                    required="true" />
+                <Input
+                    id="productV4RatingInput"
+                    value="{demoV4>Rating}"
+                    change=".onFieldChange" />
+
+                <Label
+                    id="productV4PriceLabel"
+                    text="{i18n>productPrice}"
+                    required="true" />
+                <Input
+                    id="productV4PriceInput"
+                    value="{demoV4>Price}"
+                    change=".onFieldChange" />
+            </form:SimpleForm>
+        </content>
+
+        <beginButton>
+            <Button
+                id="saveProductV4Button"
+                text="{i18n>save}"
+                type="Emphasized"
+                press=".onSaveProductV4" />
+        </beginButton>
+
+        <endButton>
+            <Button
+                id="cancelProductV4Button"
+                text="{i18n>cancel}"
+                press=".onCancelProductV4" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
