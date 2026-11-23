@@ -375,6 +375,10 @@
                                     <Column id="productV4PriceColumn">
                                         <Text id="productV4PriceHeader" text="{i18n>productPrice}" />
                                     </Column>
+
+                                    <Column id="productV4ActionsColumn" width="6rem">
+                                        <Text id="productV4ActionsHeader" text="{i18n>actions}" />
+                                    </Column>
                                 </columns>
 
                                 <items>
@@ -393,6 +397,10 @@
                                                 text="{demoV4>DiscontinuedDate}" />
                                             <Text id="productV4RatingCell" text="{demoV4>Rating}" />
                                             <Text id="productV4PriceCell" text="{demoV4>Price}" />
+                                            <Button
+                                                id="editProductV4Button"
+                                                text="{i18n>editProduct}"
+                                                press=".onEditProductV4" />
                                         </cells>
                                     </ColumnListItem>
                                 </items>
