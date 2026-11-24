@@ -8,7 +8,7 @@
         core:require="{
             DateTimeOffsetType: 'sap/ui/model/odata/type/DateTimeOffset'
         }"
-        title="{i18n>addProductTitle}"
+        title="{= ${view>/productV4EditMode} ? ${i18n>editProductTitle} : ${i18n>addProductTitle} }"
         contentWidth="40rem"
         busyIndicatorDelay="0"
         afterClose=".onProductV4DialogAfterClose">

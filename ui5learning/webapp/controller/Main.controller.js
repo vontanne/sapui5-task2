@@ -677,6 +677,8 @@ sap.ui.define(
         const viewModel = this.getModel("view");
         const listBinding = this.byId("productsV4Table").getBinding("items");
 
+        viewModel.setProperty("/productV4EditMode", false);
+
         const context = listBinding.create(
           { DiscontinuedDate: null },
           true,
@@ -688,6 +690,24 @@ sap.ui.define(
             throw error;
           }
         });
+
+        await this._openProductV4Dialog(context);
+      },
+
+      async onEditProductV4(event) {
+        if (this._productV4DialogLoading) {
+          return;
+        }
+
+        const viewModel = this.getModel("view");
+        const context = event.getSource().getBindingContext("demoV4");
+
+        viewModel.setProperty("/productV4EditMode", true);
+        await this._openProductV4Dialog(context);
+      },
+
+      async _openProductV4Dialog(context) {
+        const viewModel = this.getModel("view");
 
         viewModel.setProperty("/maxReleaseDate", UI5Date.getInstance());
 
@@ -725,8 +745,16 @@ sap.ui.define(
           return;
         }
 
+        const viewModel = this.getModel("view");
         const demoV4Model = this.getModel("demoV4");
         const resourceBundle = this.getResourceBundle();
+        const isEditMode = viewModel.getProperty("/productV4EditMode");
+        const successKey = isEditMode
+          ? "updateProductSuccess"
+          : "createProductSuccess";
+        const errorKey = isEditMode
+          ? "updateProductError"
+          : "createProductError";
         let hasErrors = false;
 
         this._productV4Dialog.setBusy(true);
@@ -739,11 +767,11 @@ sap.ui.define(
 
         if (hasErrors || demoV4Model.hasPendingChanges("changes")) {
           this._productV4Dialog.setBusy(false);
-          MessageBox.error(resourceBundle.getText("createProductError"));
+          MessageBox.error(resourceBundle.getText(errorKey));
           return;
         }
 
-        MessageToast.show(resourceBundle.getText("createProductSuccess"));
+        MessageToast.show(resourceBundle.getText(successKey));
         this._productV4Dialog.close();
       },
 
